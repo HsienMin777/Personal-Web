@@ -67,6 +67,24 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 24px rgba(255, 255, 255, 0.06);
         }
 
+        /* 手機版效能優化：backdrop-filter 與大面積模糊在 Safari 上非常吃資源，
+           小螢幕直接關閉，改用純色底，觀感接近、但流暢很多 */
+        @media (max-width: 767px) {
+            .blob {
+                display: none;
+            }
+
+            .glass-card {
+                background: rgba(30, 30, 33, 0.94);
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+            }
+
+            .glass-card:hover {
+                background: rgba(34, 34, 38, 0.96);
+            }
+        }
+
         /* 彈窗開關動畫 */
         #modal-overlay {
             transition: opacity 0.25s ease;
