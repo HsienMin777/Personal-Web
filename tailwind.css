@@ -554,6 +554,10 @@ video {
   display: none;
 }
 
+.pointer-events-none {
+  pointer-events: none;
+}
+
 .fixed {
   position: fixed;
 }
@@ -596,6 +600,10 @@ video {
 
 .top-0 {
   top: 0px;
+}
+
+.-z-10 {
+  z-index: -10;
 }
 
 .z-50 {
