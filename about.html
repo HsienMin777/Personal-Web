@@ -5,15 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Cyber Portfolio 2026</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="tailwind.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-------------------------------------------------------------------------
     CSS
     ----------------------------------------------------------------------->
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Space+Grotesk:wght@300;400;500;700&display=swap');
-
         html {
             scroll-behavior: smooth;
         }
@@ -36,19 +38,20 @@
         /* 環境光暈：純白單色漫射光，僅暗示空間深度 */
         .blob {
             position: absolute;
-            width: 600px;
-            height: 600px;
+            width: 500px;
+            height: 500px;
             background: rgba(255, 255, 255, 0.045);
-            filter: blur(130px);
+            filter: blur(80px);
             border-radius: 50%;
             z-index: -1;
+            will-change: transform;
         }
 
         /* 消光毛玻璃材質 */
         .glass-card {
-            background: rgba(40, 40, 43, 0.55);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(40, 40, 43, 0.72);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
             position: relative;
@@ -58,7 +61,7 @@
 
         .glass-card:hover {
             border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(46, 46, 50, 0.65);
+            background: rgba(46, 46, 50, 0.8);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 24px rgba(255, 255, 255, 0.06);
         }
 
@@ -155,7 +158,8 @@
 
                 <div
                     class="relative w-56 md:w-64 aspect-[3/4] rounded-[2rem] overflow-hidden border border-white/10 glass-card">
-                    <img src="./assets/大頭照2.jpg" alt="Profile" class="w-full h-full object-cover">
+                    <img src="./assets/大頭照2.jpg" alt="Profile" class="w-full h-full object-cover" width="256"
+                        height="341" decoding="async" fetchpriority="high">
 
                     <div
                         class="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent h-full w-full -translate-y-full animate-[scan_3s_linear_infinite]">
