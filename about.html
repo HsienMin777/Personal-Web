@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Cyber Portfolio 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-------------------------------------------------------------------------
+    CSS
+    ----------------------------------------------------------------------->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Space+Grotesk:wght@300;400;500;700&display=swap');
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section[id] {
+            scroll-margin-top: 110px;
+        }
+
+        body {
+            background-color: #0A0A0A;
+            color: #ECECEC;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* 環境光暈：純白單色漫射光，僅暗示空間深度 */
+        .blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.045);
+            filter: blur(130px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* 消光毛玻璃材質 */
+        .glass-card {
+            background: rgba(40, 40, 43, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(46, 46, 50, 0.65);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 24px rgba(255, 255, 255, 0.06);
+        }
+
+        /* 彈窗開關動畫 */
+        #modal-overlay {
+            transition: opacity 0.25s ease;
+            opacity: 0;
+        }
+
+        #modal-overlay.modal-active {
+            opacity: 1;
+        }
+
+        #modal-overlay>.glass-card {
+            transition: transform 0.25s ease, opacity 0.25s ease;
+            transform: scale(0.96);
+            opacity: 0;
+        }
+
+        #modal-overlay.modal-active>.glass-card {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .text-glow-white {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        }
+
+        .glow-hover:hover {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes scan {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        /* 面板滾輪 */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-white/20 selection:text-white">
+
+    <div class="blob top-0 left-0"></div>
+    <div class="blob bottom-0 right-0"></div>
+
+    <!-------------------------------------------------------------------------
+    導覽列
+    ----------------------------------------------------------------------->
+    <nav class="fixed w-full z-50 p-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center glass-card rounded-2xl px-8 py-4">
+            <a href="index.html" class="font-mono text-xl tracking-widest text-white">PORTFOLIO</a>
+            <div class="hidden md:flex space-x-10 text-sm tracking-widest font-medium font-mono text-gray-400">
+                <a href="index.html#home" class="hover:text-white transition-colors">HOME</a>
+                <a href="about.html" class="text-white transition-colors">ABOUT</a>
+                <a href="index.html#work" class="hover:text-white transition-colors">PROJECTS</a>
+                <a href="index.html#contact" class="hover:text-white transition-colors">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-------------------------------------------------------------------------
+    關於我
+    ----------------------------------------------------------------------->
+    <section class="min-h-screen flex flex-col justify-center px-6 pt-40 pb-32 max-w-5xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-16 mb-16">
+
+            <div class="relative group shrink-0" data-aos="fade-right" data-aos-duration="1200">
+                <div
+                    class="absolute -inset-1 bg-white/20 rounded-[2rem] blur opacity-30 group-hover:opacity-50 transition duration-1000">
+                </div>
+
+                <div
+                    class="relative w-56 md:w-64 aspect-[3/4] rounded-[2rem] overflow-hidden border border-white/10 glass-card">
+                    <img src="./assets/大頭照2.jpg" alt="Profile" class="w-full h-full object-cover">
+
+                    <div
+                        class="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent h-full w-full -translate-y-full animate-[scan_3s_linear_infinite]">
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1 text-center md:text-left" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="text-gray-500 font-mono tracking-[0.3em] mb-4">SYSTEM PROFILE</h2>
+                <h1 class="font-mono text-5xl md:text-7xl mb-8 leading-tight">
+                    About <span class="text-white text-glow-white">Me</span>
+                </h1>
+
+                <div class="glass-card rounded-3xl p-8 md:p-10">
+                    <p class="text-gray-300 text-base md:text-lg leading-relaxed">
+                        我是一名橫跨<span class="text-white font-bold">計算機科學</span>與<span
+                            class="text-white font-bold">電機工程</span>的碩士研究員，專注於<span
+                            class="text-white font-bold">量子啟發計算（<span class="font-mono">Quantum-Inspired
+                                    Computing</span>）</span>與組合最佳化問題。
+                        相較於單純寫程式，我更著迷於在演算法的邊界尋找突破——如何用降維與啟發式搜尋，馴服看似無解的組合爆炸。
+                    </p>
+                    <p class="text-gray-300 text-base md:text-lg leading-relaxed mt-6">
+                        從實驗室的理論推導，到落地的每一行程式碼，我始終相信：真正優雅的系統，是把混沌的運算邏輯，收斂成使用者一眼就能「看見」的結果。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-10">
+            <div class="glass-card rounded-3xl p-8 cursor-pointer group relative overflow-hidden"
+                onclick="openModal('fishvisid')" data-aos="zoom-in-up" data-aos-delay="200">
+
+                <div
+                    class="absolute inset-0 border-2 border-transparent group-hover:border-white/20 rounded-3xl transition-all duration-500">
+                </div>
+
+                <div class="aspect-video bg-black/40 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-white/5">
+                    <div
+                        class="w-full h-full bg-gradient-to-tr from-white/10 to-transparent group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
+                        <span
+                            class="text-gray-400 font-mono tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">VIEW
+                            SYSTEM</span>
+                    </div>
+                </div>
+
+                <h4 class="font-display text-2xl mb-3 text-white">
+                    <span class="font-mono">FishVisID</span>：魚類視覺辨識與即時市場行情系統
+                </h4>
+                <p class="text-gray-400 mb-6">拍照即辨魚種，串接資料庫即時顯示俗名、營養價值與市場行情的 Android 影像辨識工具。</p>
+                <div class="flex gap-3 flex-wrap">
+                    <span
+                        class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">TensorFlow</span>
+                    <span
+                        class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Keras</span>
+                    <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">TensorFlow
+                        Lite</span>
+                    <span
+                        class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">CNN</span>
+                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Android
+                        (Java/Kotlin)</span>
+                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Computer
+                        Vision</span>
+                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Data
+                        Preprocessing</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl p-8 cursor-pointer group relative overflow-hidden"
+                onclick="openModal('thesis')" data-aos="zoom-in-up" data-aos-delay="300">
+
+                <div
+                    class="absolute inset-0 border-2 border-transparent group-hover:border-white/20 rounded-3xl transition-all duration-500">
+                </div>
+
+                <div class="aspect-video bg-black/40 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-white/5">
+                    <div
+                        class="w-full h-full bg-gradient-to-tr from-white/10 to-transparent group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
+                        <span
+                            class="text-gray-400 font-mono tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">VIEW
+                            SYSTEM</span>
+                    </div>
+                </div>
+
+                <h4 class="font-display text-2xl mb-3 text-white">
+                    突破維度詛咒：<span class="font-mono">PCA-QUBO</span> 混合式相片馬賽克求解
+                </h4>
+                <p class="text-gray-400 mb-6">結合 PCA 遞迴降維與量子啟發退火，突破 35,000 選 3,200 的組合爆炸瓶頸，實現零重複的極致視覺還原。</p>
+                <div class="flex gap-3 flex-wrap">
+                    <span
+                        class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Quantum-Inspired
+                        Computing</span>
+                    <span
+                        class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">QUBO</span>
+                    <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">PCA</span>
+                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Combinatorial
+                        Optimization</span>
+                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Digital
+                        Annealer</span>
+                    <span
+                        class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Python</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-16 flex flex-col md:flex-row gap-6" data-aos="fade-up" data-aos-delay="500">
+            <a href="index.html#work"
+                class="bg-white hover:bg-gray-200 text-black font-bold py-4 px-10 rounded-full transition-all shadow-[0_0_15px_rgba(255,255,255,0.15)] text-center">
+                查看我的專案
+            </a>
+            <a href="index.html#contact"
+                class="border border-white/20 hover:border-white/60 py-4 px-10 rounded-full transition-all backdrop-blur-md text-center">
+                聯繫我
+            </a>
+        </div>
+    </section>
+
+    <footer class="py-10 text-center text-gray-600 text-xs tracking-widest uppercase">
+        &copy; 2026 Developed with ❤️ by You.
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 120,
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+
+    <script>
+        function openModal(id) {
+            const modal = document.getElementById('modal-overlay');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            document.querySelectorAll('.modal-panel').forEach(panel => panel.classList.add('hidden'));
+            const target = document.getElementById('modal-panel-' + id);
+            if (target) target.classList.remove('hidden');
+
+            void modal.offsetWidth; // 強制重繪，確保動畫從初始狀態開始
+            modal.classList.add('modal-active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal-overlay');
+            modal.classList.remove('modal-active');
+            document.body.style.overflow = 'auto';
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 250);
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('modal-overlay');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+
+    <!-------------------------------------------------------------------------
+    專題面板
+    ----------------------------------------------------------------------->
+    <div id="modal-overlay"
+        class="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4">
+        <div
+            class="glass-card max-w-2xl w-full rounded-3xl overflow-hidden relative border border-white/10 shadow-[0_0_50px_rgba(255,255,255,0.06)]">
+            <div class="max-h-[80vh] overflow-y-auto custom-scrollbar p-6 md:p-10">
+
+                <div class="h-1 w-full bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+
+                <div id="modal-panel-fishvisid" class="modal-panel hidden p-6 md:p-10">
+                    <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 bg-white/70 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+                            </div>
+                            <h2 class="font-mono text-2xl tracking-tight text-white">FISHVISID_VISION_ENGINE</h2>
+                        </div>
+                        <button onclick="closeModal()"
+                            class="text-gray-400 hover:text-white transition-transform hover:rotate-90">✕</button>
+                    </div>
+
+                    <div class="mb-10 space-y-4">
+                        <p class="text-gray-300 leading-relaxed">
+                            這是一套讓魚類辨識回歸「拍照即知」的行動端系統。使用者透過手機相機拍攝或匯入照片，即可自動分類
+                            <span class="text-white font-bold">魚種</span>，並串接資料庫即時顯示俗名、營養價值與市場交易行情，解決傳統市場與超市選購海鮮時難以辨識魚種與行情的痛點。
+                        </p>
+
+                        <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
+                            <p class="text-white font-bold flex items-center gap-2 mb-2">
+                                <span>🐟</span> 核心技術與架構：
+                            </p>
+                            <ul class="text-sm text-gray-400 space-y-2">
+                                <li>
+                                    <strong class="text-gray-200">深度學習模型：</strong>
+                                    使用 TensorFlow / Keras 搭建 CNN 架構（Rescaling、Conv2D、MaxPooling2D、Flatten、Dense），進行圖像特徵萃取與訓練。
+                                </li>
+                                <li>
+                                    <strong class="text-gray-200">邊緣端部署：</strong>
+                                    透過 TensorFlow Lite (TFLite) 進行模型輕量化與轉換，直接部署至 Android 行動裝置進行離線推論。
+                                </li>
+                                <li>
+                                    <strong class="text-gray-200">資料工程與前處理：</strong>
+                                    自建跨季節魚類影像資料集並進行影像去背處理，降低環境雜訊干擾以提升辨識穩定度；整合政府農業交易公開數據進行行情加權分析。
+                                </li>
+                                <li>
+                                    <strong class="text-gray-200">前端與系統整合：</strong>
+                                    採用 Android Studio 開發互動介面，結合手機相機與本機圖庫模組，實現一鍵辨識流程。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-10">
+                        <p class="text-xs font-mono text-gray-500 mb-4 uppercase tracking-widest text-center">
+                            Recognition Pipeline</p>
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                                <span
+                                    class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">CAPTURE</span>
+                                <p class="text-sm font-bold text-white mb-1">拍攝 / 匯入照片</p>
+                                <p class="text-[10px] text-gray-400">去背前處理，降低雜訊</p>
+                            </div>
+                            <div class="text-gray-500">→</div>
+                            <div
+                                class="flex-1 text-center p-4 rounded-xl bg-white/10 border border-white/20 relative">
+                                <span
+                                    class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">TFLITE</span>
+                                <p class="text-sm font-bold text-white mb-1">離線 CNN 推論</p>
+                                <p class="text-[10px] text-gray-300">裝置端分類魚種</p>
+                            </div>
+                            <div class="text-gray-500">→</div>
+                            <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                                <span
+                                    class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">RESULT</span>
+                                <p class="text-sm font-bold text-white mb-1">比對行情資料庫</p>
+                                <p class="text-[10px] text-gray-400">顯示俗名/營養/價格</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="mt-8 bg-black/60 rounded-xl p-4 font-mono text-[11px] border border-white/5 shadow-inner">
+                        <div class="flex justify-between text-gray-500 mb-2 border-b border-white/5 pb-1">
+                            <span>FISHVISID_LOG</span>
+                            <span>ANDROID</span>
+                        </div>
+                        <p class="text-gray-400">$ FishVisID.apk</p>
+                        <p class="text-gray-300">>>> [CAMERA] Image captured: fish_0092.jpg</p>
+                        <p class="text-gray-300">>>> [TFLITE] Running on-device CNN inference...</p>
+                        <p class="text-white">>>> [DB] Matched species -> 俗名 / 營養價值 / 市場行情</p>
+                    </div>
+                </div>
+
+                <div id="modal-panel-thesis" class="modal-panel hidden p-6 md:p-10">
+                    <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 bg-white/70 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+                            </div>
+                            <h2 class="font-mono text-2xl tracking-tight text-white">QUBO_MOSAIC_THESIS</h2>
+                        </div>
+                        <button onclick="closeModal()"
+                            class="text-gray-400 hover:text-white transition-transform hover:rotate-90">✕</button>
+                    </div>
+
+                    <div class="mb-10 space-y-4">
+                        <p class="text-gray-300 leading-relaxed">
+                            本碩士論文致力於解決超大型組合最佳化問題中的<span class="text-white font-bold">「維度詛咒（<span
+                                    class="font-mono">Curse of Dimensionality</span>）」</span>。在生成完全不重複的相片馬賽克時，若將
+                            35,000
+                            張候選圖塊精準映射至 3,200 個目標方塊，會產生上億個二元變數，直接癱瘓傳統運算硬體。本研究提出一套混合式演算法，結合主成分分析與量子啟發退火技術，成功突破運算瓶頸，實現極致的視覺還原度。
+                        </p>
+
+                        <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
+                            <p class="text-white font-bold flex items-center gap-2 mb-2">
+                                <span>⚛️</span> 核心技術與架構：
+                            </p>
+                            <ul class="text-sm text-gray-400 space-y-2">
+                                <li>
+                                    <strong class="text-gray-200">PCA 遞迴降維空間切割：</strong>
+                                    將特徵資料轉換至 CIELAB 色彩空間，提取具最大變異數的第一主成分（PC1）進行遞迴對半切割，將龐大的搜尋空間降維成硬體可負荷的小型子問題。
+                                </li>
+                                <li>
+                                    <strong class="text-gray-200">QUBO 模型建構：</strong>
+                                    將圖塊配對任務公式化為二次無約束二元最佳化（QUBO）模型，設計精確的懲罰項（Penalty）以嚴格確保「一方塊一圖塊」且「圖塊絕對不重複」的約束條件。
+                                </li>
+                                <li>
+                                    <strong class="text-gray-200">硬體求解與效能評估：</strong>
+                                    導入 Fujitsu Digital Annealer (DA) 與 Compal GPU Annealer (CGA)
+                                    進行求解。相較於傳統模擬退火（SA）容易陷入局部極小值並產生視覺瑕疵，DA 在子問題規模為 15 時展現最佳的色彩保真度（Lowest Delta
+                                    E），並將執行時間穩定控制在 1,000-3,000 秒內。
+                                </li>
+                                <li>
+                                    <strong class="text-gray-200">學術認可：</strong>
+                                    此研究成果已入選 IEEE QCE26 國際量子運算會議海報發表。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-10">
+                        <p class="text-xs font-mono text-gray-500 mb-4 uppercase tracking-widest text-center">
+                            Solver Pipeline</p>
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                                <span
+                                    class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">PCA</span>
+                                <p class="text-sm font-bold text-white mb-1">CIELAB 遞迴切割</p>
+                                <p class="text-[10px] text-gray-400">PC1 對半切割降維</p>
+                            </div>
+                            <div class="text-gray-500">→</div>
+                            <div
+                                class="flex-1 text-center p-4 rounded-xl bg-white/10 border border-white/20 relative">
+                                <span
+                                    class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">QUBO</span>
+                                <p class="text-sm font-bold text-white mb-1">懲罰項建模</p>
+                                <p class="text-[10px] text-gray-300">確保零重複分配</p>
+                            </div>
+                            <div class="text-gray-500">→</div>
+                            <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                                <span
+                                    class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">DA
+                                    / CGA</span>
+                                <p class="text-sm font-bold text-white mb-1">硬體退火求解</p>
+                                <p class="text-[10px] text-gray-400">子問題規模 15 最佳</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="mt-8 bg-black/60 rounded-xl p-4 font-mono text-[11px] border border-white/5 shadow-inner">
+                        <div class="flex justify-between text-gray-500 mb-2 border-b border-white/5 pb-1">
+                            <span>QUBO_SOLVER_LOG</span>
+                            <span>IEEE QCE26</span>
+                        </div>
+                        <p class="text-gray-400">$ python solve_photomosaic_qubo.py --solver=DA</p>
+                        <p class="text-gray-300">>>> [PCA] CIELAB color space, PC1 recursive bisection...</p>
+                        <p class="text-gray-300">>>> [QUBO] Building penalty-constrained assignment model...</p>
+                        <p class="text-white">>>> [DA] Sub-problem size=15 | Runtime: 1,842s | Lowest Delta E</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

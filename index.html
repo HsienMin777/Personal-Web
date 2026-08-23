@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Portfolio | 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-------------------------------------------------------------------------
+    CSS
+    ----------------------------------------------------------------------->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Space+Grotesk:wght@300;400;500;700&display=swap');
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section[id] {
+            scroll-margin-top: 110px;
+        }
+
+        body {
+            background-color: #0A0A0A;
+            color: #ECECEC;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* 環境光暈：純白單色漫射光，僅暗示空間深度 */
+        .blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.045);
+            filter: blur(130px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* 消光毛玻璃材質 */
+        .glass-card {
+            background: rgba(40, 40, 43, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(46, 46, 50, 0.65);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 24px rgba(255, 255, 255, 0.06);
+        }
+
+        /* 彈窗開關動畫 */
+        #modal-overlay {
+            transition: opacity 0.25s ease;
+            opacity: 0;
+        }
+
+        #modal-overlay.modal-active {
+            opacity: 1;
+        }
+
+        #modal-overlay>.glass-card {
+            transition: transform 0.25s ease, opacity 0.25s ease;
+            transform: scale(0.96);
+            opacity: 0;
+        }
+
+        #modal-overlay.modal-active>.glass-card {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .text-glow-white {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        }
+
+        .glow-hover:hover {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* 面板滾輪 */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-white/20 selection:text-white">
+
+    <div class="blob top-0 left-0"></div>
+    <div class="blob bottom-0 right-0"></div>
+
+    <!-------------------------------------------------------------------------
+    首頁
+    ----------------------------------------------------------------------->
+    <nav class="fixed w-full z-50 p-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center glass-card rounded-2xl px-8 py-4">
+            <div class="font-mono text-xl tracking-widest text-white">Personal Web</div>
+            <div class="hidden md:flex space-x-10 text-sm tracking-widest font-medium font-mono text-gray-400">
+                <a href="#home" class="hover:text-white transition-colors">HOME</a>
+                <a href="about.html" class="hover:text-white transition-colors">ABOUT</a>
+                <a href="#work" class="hover:text-white transition-colors">PROJECTS</a>
+                <a href="#contact" class="hover:text-white transition-colors">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20">
+
+            <div class="relative group" data-aos="fade-right" data-aos-duration="1200">
+                <div
+                    class="absolute -inset-1 bg-white/20 rounded-full blur opacity-30 group-hover:opacity-50 transition duration-1000">
+                </div>
+
+                <div
+                    class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border border-white/10 glass-card">
+                    <img src="./assets/大頭照.jpg" alt="Profile" class="w-full h-full object-cover">
+
+                    <div
+                        class="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent h-full w-full -translate-y-full animate-[scan_3s_linear_infinite]">
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1 text-center md:text-left" data-aos="fade-left" data-aos-duration="1200">
+                <h2 class="text-gray-500 font-mono tracking-[0.3em] mb-4">SYSTEM INITIATED</h2>
+                <h1 class="font-mono text-5xl md:text-7xl mb-6 leading-tight">
+                    <span class="text-white text-glow-white">NI,HSIEN-MIN</span>
+                </h1>
+
+                <div class="mb-10 space-y-4">
+                    <p class="font-display text-gray-300 text-lg md:text-3xl">
+                        倪咸民
+                    </p>
+                    <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-lg mx-auto md:mx-0">
+                        熱愛探索新知的開發者。
+就學期間專注於機器學習與量子啟發式運算，並積極擴充在 Python、C++ 與系統架構上的技術儲備。喜歡面對挑戰，永遠保持學習的熱忱！
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#work"
+                        class="bg-white hover:bg-gray-200 text-black font-bold py-3 px-8 rounded-full transition-all shadow-[0_0_15px_rgba(255,255,255,0.15)] text-center">
+                        查看專案
+                    </a>
+                    <a href="#contact"
+                        class="border border-white/20 hover:border-white/60 py-3 px-8 rounded-full transition-all backdrop-blur-md text-center">
+                        聯絡合作
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        @keyframes scan {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100%);
+            }
+        }
+    </style>
+
+    <section id="work" class="py-32 px-6 max-w-6xl mx-auto">
+        <h3 class="font-display text-4xl mb-16 flex items-center gap-4" data-aos="fade-right">
+            <span class="w-12 h-[2px] bg-white/40"></span> 精選專案
+        </h3>
+
+        <div class="glass-card rounded-3xl p-10 md:p-14 mb-16" data-aos="fade-up">
+            <p class="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Featured System</p>
+            <h4 class="font-mono text-2xl mb-3 text-white">AI Interview（內容待補）</h4>
+            <p class="text-gray-400">內容待補...</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-10">
+            <div class="glass-card rounded-3xl p-8 cursor-pointer group relative overflow-hidden"
+                onclick="openModal('Remote_Controller')" data-aos="zoom-in-up" data-aos-delay="200">
+
+                <div
+                    class="absolute inset-0 border-2 border-transparent group-hover:border-white/20 rounded-3xl transition-all duration-500">
+                </div>
+
+                <div
+                    class="aspect-video bg-black/40 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-white/5">
+                    <div
+                        class="w-full h-full bg-gradient-to-tr from-white/10 to-transparent group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
+                        <span
+                            class="text-gray-400 font-mono tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">VIEW
+                            SYSTEM</span>
+                    </div>
+                </div>
+
+                <h4 class="font-display text-2xl mb-3 text-white">
+                    全方位遠端控制系統
+                </h4>
+                <p class="text-gray-400 mb-6">基於 Flask 打造，橋接 Web 介面與 Windows 系統底層，透過手機瀏覽器或 LINE Bot 即時操控電腦...</p>
+
+                <div class="flex gap-3">
+                    <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Flask</span>
+                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">PyAutoGUI</span>
+                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">LINE Bot</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl p-8 cursor-pointer group relative overflow-hidden"
+                onclick="openModal('sql-project')" data-aos="zoom-in-up" data-aos-delay="200">
+
+                <div
+                    class="absolute inset-0 border-2 border-transparent group-hover:border-white/20 rounded-3xl transition-all duration-500">
+                </div>
+
+                <div
+                    class="aspect-video bg-black/40 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-white/5">
+                    <div
+                        class="w-full h-full bg-gradient-to-tr from-white/10 to-transparent group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
+                        <span
+                            class="text-gray-400 font-mono tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">VIEW
+                            SYSTEM</span>
+                    </div>
+                </div>
+
+                <h4 class="font-display text-2xl mb-3 text-white">智慧型
+                    <span class="font-mono">Text-to-SQL</span> 代理</h4>
+                <p class="text-gray-400 mb-6">整合 LLM 與資料庫 Schema，實現自然語言查詢校園管理系統...</p>
+
+                <div class="flex gap-3">
+                    <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Gemini
+                        API</span>
+                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">RAG</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl p-8 cursor-pointer group relative overflow-hidden"
+                onclick="openModal('ai-hungrysnake')" data-aos="zoom-in-up" data-aos-delay="200">
+
+                <div
+                    class="absolute inset-0 border-2 border-transparent group-hover:border-white/20 rounded-3xl transition-all duration-500">
+                </div>
+
+                <div
+                    class="aspect-video bg-black/40 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-white/5">
+                    <div
+                        class="w-full h-full bg-gradient-to-tr from-white/10 to-transparent group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
+                        <span
+                            class="text-gray-400 font-mono tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">VIEW
+                            SYSTEM</span>
+                    </div>
+                </div>
+
+                <h4 class="font-display text-2xl mb-3 text-white">
+                    <span class="font-mono">AI</span> 雙蛇對抗賽局
+                </h4>
+                <p class="text-gray-400 mb-6">基於 Deep Q-Learning 的多智能體強化學習。訓練兩條蛇進行「追捕」與「逃脫」的非對稱博弈。</p>
+
+                <div class="flex gap-3">
+                    <span
+                        class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">PyTorch</span>
+                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">DQN</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl p-8 cursor-pointer group relative overflow-hidden"
+                onclick="openModal('ai-dino')" data-aos="zoom-in-up" data-aos-delay="200">
+
+                <div
+                    class="absolute inset-0 border-2 border-transparent group-hover:border-white/20 rounded-3xl transition-all duration-500">
+                </div>
+
+                <div
+                    class="aspect-video bg-black/40 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-white/5">
+                    <div
+                        class="w-full h-full bg-gradient-to-tr from-white/10 to-transparent group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
+                        <span
+                            class="text-gray-400 font-mono tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">VIEW
+                            SYSTEM</span>
+                    </div>
+                </div>
+
+                <h4 class="font-display text-2xl mb-3 text-white">
+                    <span class="font-mono">AI</span> 體感恐龍跑酷
+                </h4>
+                <p class="text-gray-400 mb-6">丟掉鍵盤！透過 OpenCV 與 MediaPipe 捕捉手部骨架，用手勢隔空控制 Chrome 恐龍進行跳躍與蹲下。</p>
+
+                <div class="flex gap-3">
+                    <span
+                        class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">MediaPipe</span>
+                    <span
+                        class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">OpenCV</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 px-6 text-center">
+        <div class="glass-card max-w-4xl mx-auto rounded-[3rem] py-20 px-10" data-aos="flip-up">
+            <h3 class="font-display text-4xl md:text-5xl mb-6">準備好開始合作了嗎？</h3>
+            <p class="text-gray-400 text-lg mb-12">無論是技術交流或專案開發，歡迎透過以下方式聯絡我！</p>
+
+            <div class="flex flex-col items-center gap-8">
+
+                <a href="mailto:bbei8640@gmail.com" class="group flex flex-col items-center gap-2">
+                    <span class="text-xs font-mono text-gray-500 tracking-widest uppercase">Email</span>
+                    <span class="text-xl md:text-4xl font-bold text-white glow-hover transition-all break-all">
+                        bbei8640@gmail.com
+                    </span>
+                </a>
+
+                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20 mt-4">
+
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-gray-500 tracking-widest uppercase">Phone</span>
+                        <a href="tel:+8860909770018"
+                            class="text-xl md:text-2xl font-bold text-white glow-hover transition-colors">
+                            0909-770-018
+                        </a>
+                    </div>
+
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-gray-500 tracking-widest uppercase">Instagram</span>
+                        <a href="https://www.instagram.com/ni_x_m_0919" target="_blank"
+                            class="text-xl md:text-2xl font-bold text-white glow-hover transition-all">
+                            @ni_x_m_0919
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-10 text-center text-gray-600 text-xs tracking-widest uppercase">
+        &copy; 2026 Developed with ❤️ by You.
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 120,
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+
+    <script>
+        function openModal(id) {
+            const modal = document.getElementById('modal-overlay');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // 防止背景滾動
+
+            document.querySelectorAll('.modal-panel').forEach(panel => panel.classList.add('hidden'));
+            const target = document.getElementById('modal-panel-' + id);
+            if (target) target.classList.remove('hidden');
+
+            void modal.offsetWidth; // 強制重繪，確保動畫從初始狀態開始
+            modal.classList.add('modal-active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal-overlay');
+            modal.classList.remove('modal-active');
+            document.body.style.overflow = 'auto';
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 250);
+        }
+
+        // 點擊背景也可關閉
+        window.onclick = function (event) {
+            const modal = document.getElementById('modal-overlay');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+
+    <!-------------------------------------------------------------------------
+    專題面板
+    ----------------------------------------------------------------------->
+
+
+    <div id="modal-overlay"
+        class="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4">
+        <div
+            class="glass-card max-w-2xl w-full rounded-3xl overflow-hidden relative border border-white/10 shadow-[0_0_50px_rgba(255,255,255,0.06)]">
+            <div class="max-h-[80vh] overflow-y-auto custom-scrollbar p-6 md:p-10">
+
+                <div class="h-1 w-full bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+
+                <div id="modal-panel-Remote_Controller" class="modal-panel hidden p-6 md:p-10">
+    <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-3 h-3 bg-white/70 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>
+            <h2 class="font-mono text-2xl tracking-tight text-white">IOT_REMOTE_CONTROLLER</h2>
+        </div>
+        <button onclick="closeModal()" class="text-gray-400 hover:text-white transition-transform hover:rotate-90">✕</button>
+    </div>
+<!--Remote Controller-->
+    <div class="mb-10 space-y-4">
+        <p class="text-gray-300 leading-relaxed">
+            這是一個基於 Flask 架構的 <span class="text-white font-bold">全方位遠端控制系統</span>。
+            它成功橋接了 Web 介面與 Windows 系統底層，讓使用者能透過手機瀏覽器或 <span class="text-white font-bold font-mono">LINE Bot</span> 即時操控電腦。
+        </p>
+
+        <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
+            <p class="text-white font-bold flex items-center gap-2 mb-2">
+                <span>⚡</span> 核心整合技術：
+            </p>
+            <ul class="text-sm text-gray-400 space-y-2">
+                <li>
+                    <strong class="text-gray-200">硬體層控制 (PyAutoGUI)：</strong>
+                    實作虛擬觸控板，透過 WebSocket/SocketIO 傳輸座標，達成低延遲的遠端滑鼠與視窗管理 (Alt+F4)。
+                </li>
+                <li>
+                    <strong class="text-gray-200">自動化與爬蟲：</strong>
+                    整合 Selenium 自動喚醒 ChatGPT 並自動輸入內容，同時結合 BeautifulSoup 抓取 CNA 即時新聞並推送至 LINE。
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mb-10">
+        <p class="text-xs font-mono text-gray-500 mb-4 uppercase tracking-widest text-center">System Architecture</p>
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">USER</span>
+                <p class="text-sm font-bold text-white mb-1">手機 Web/LINE</p>
+                <p class="text-[10px] text-gray-400">發送控制指令</p>
+            </div>
+            <div class="text-gray-500">→</div>
+            <div class="flex-1 text-center p-4 rounded-xl bg-white/10 border border-white/20 relative">
+                <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">FLASK</span>
+                <p class="text-sm font-bold text-white mb-1">指令路由解析</p>
+                <p class="text-[10px] text-gray-300">處理 Socket/Fetch</p>
+            </div>
+            <div class="text-gray-500">→</div>
+            <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">OS</span>
+                <p class="text-sm font-bold text-white mb-1">系統層執行</p>
+                <p class="text-[10px] text-gray-400">滑鼠/關機/ChatGPT</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8 bg-black/60 rounded-xl p-4 font-mono text-[11px] border border-white/5 shadow-inner">
+        <div class="flex justify-between text-gray-500 mb-2 border-b border-white/5 pb-1">
+            <span>FLASK_SERVER_LOG</span>
+            <span>PORT: 5000</span>
+        </div>
+        <p class="text-gray-400">$ python main.py</p>
+        <p class="text-gray-300">>>> [IP] Server started on http://192.168.1.xxx:5000</p>
+        <p class="text-gray-300">>>> [CMD] Received: 'mouse_move' dx=10, dy=-5</p>
+        <p class="text-gray-300">>>> [LINE] Pushing latest CNA News to User U2317f...</p>
+        <p class="text-white">>>> [GPT] Launching Selenium automation session...</p>
+    </div>
+</div>
+<!--SQL to Text-->
+
+                <div id="modal-panel-sql-project" class="modal-panel hidden">
+                <div class="p-6 md:p-10">
+                    <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 bg-white/70 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>
+                            <h2 class="font-mono text-2xl tracking-tight text-white">AGENT_SQL_CORE</h2>
+                        </div>
+                        <button onclick="closeModal()"
+                            class="text-gray-400 hover:text-white transition-transform hover:rotate-90">✕</button>
+                    </div>
+
+                    <div class="mb-10 space-y-4">
+                        <p class="text-gray-300 leading-relaxed">
+                            這是一個讓資料庫「聽懂人話」的智慧代理人。使用者無需撰寫複雜代碼，只需透過 <span class="text-white font-bold">日常自然語言</span>
+                            即可直觀地進行數據的 <span class="text-white border-b border-white/20">檢索</span>、<span
+                                class="text-white border-b border-white/20">分析</span> 與 <span
+                                class="text-white border-b border-white/20">編輯</span>。
+                        </p>
+
+                        <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
+                            <p class="text-white font-bold flex items-center gap-2 mb-2">
+                                <span>🛡️</span> 安全與效能優化：
+                            </p>
+                            <ul class="text-sm text-gray-400 space-y-2">
+                                <li>
+                                    <strong class="text-gray-200">數據去識別化 (Sanitization)：</strong>
+                                    透過 DataVault 雜湊技術，在傳輸過程中遮蔽敏感個資，確保操作時真實數據絕不外洩至外部 API。
+                                </li>
+                                <li>
+                                    <strong class="text-gray-200">遞迴式自我修復：</strong>
+                                    系統具備自動除錯機制，能即時修正 SQL 語法偏差，保證零門檻操作下的數據準確性。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-10">
+                        <p class="text-xs font-mono text-gray-500 mb-4 uppercase tracking-widest text-center">Operation
+                            Workflow</p>
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                            <span
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">STEP
+                                01</span>
+                            <p class="text-sm font-bold text-white mb-1">自然語言輸入</p>
+                            <p class="text-[10px] text-gray-400">"查 Jason 的 Email"</p>
+                        </div>
+                        <div class="text-gray-500">→</div>
+                        <div
+                            class="flex-1 text-center p-4 rounded-xl bg-white/10 border border-white/20 relative">
+                            <span
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">AI
+                                ENGINE</span>
+                            <p class="text-sm font-bold text-white mb-1">隱私去識別化</p>
+                            <p class="text-[10px] text-gray-300">Vault 雜湊加密敏感詞</p>
+                        </div>
+                        <div class="text-gray-500">→</div>
+                        <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                            <span
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">EXECUTION</span>
+                            <p class="text-sm font-bold text-white mb-1">SQL 執行與修正</p>
+                            <p class="text-[10px] text-gray-400">自動轉換成SQL語法並執行</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div
+                        class="group p-4 bg-gradient-to-br from-white/5 to-transparent rounded-2xl border border-white/5 hover:border-white/20 transition-all">
+                        <div class="flex items-center gap-3 mb-2">
+                            <h3 class="font-bold text-white">隱私金庫 (DataVault)</h3>
+                        </div>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            整合自定義加密模組，在數據傳送至 Gemini API 前自動攔截人名、學號等個資，達成 **「絕對隱私」** 的 AI 查詢。
+                        </p>
+                    </div>
+
+                    <div
+                        class="group p-4 bg-gradient-to-br from-white/5 to-transparent rounded-2xl border border-white/5 hover:border-white/20 transition-all">
+                        <div class="flex items-center gap-3 mb-2">
+                            <h3 class="font-bold text-white">自我修復循環</h3>
+                        </div>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            內建 `MAX_RETRIES` 機制，當 AI 生成錯誤語法時，系統會捕獲錯誤訊息並引導 AI 自我修正，提升查詢成功率。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-black/60 rounded-xl p-4 font-mono text-[11px] border border-white/5">
+                    <div class="flex justify-between text-gray-500 mb-2 border-b border-white/5 pb-1">
+                        <span>TERMINAL_OUTPUT</span>
+                        <span>UTF-8</span>
+                    </div>
+                    <p class="text-gray-400">$ python agent.py</p>
+                    <p class="text-gray-300">>>> [INFO] 偵測到敏感詞 "Jason" -> 替換為 [SECRET_VALUE_0]</p>
+                    <p class="text-gray-300">>>> [AI] 產生 SQL 語法：SELECT email FROM users...</p>
+                    <p class="text-white">>>> [DB] 執行成功，回傳結果：jason@school.edu.tw</p>
+                </div>
+                </div>
+
+<!--AI Dual Snake-->
+                <div id="modal-panel-ai-hungrysnake" class="modal-panel hidden p-6 md:p-10">
+                    <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 bg-white/70 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+                            </div>
+                            <h2 class="font-mono text-2xl tracking-tight text-white">DUAL_AGENT_DQN</h2>
+                        </div>
+                        <button onclick="closeModal()"
+                            class="text-gray-400 hover:text-white transition-transform hover:rotate-90">✕</button>
+                    </div>
+
+                    <div class="mb-10 space-y-4">
+                        <p class="text-gray-300 leading-relaxed">
+                            這不是普通的貪吃蛇。這是一個 <span class="text-white font-bold">強化學習 (RL)</span> 實驗場。
+                            我們訓練了兩個獨立的神經網路大腦，讓它們在封閉空間中進行 <span
+                                class="text-white border-b border-white/20">非對稱對抗</span>。
+                            沒有人類規則，只有獎勵與懲罰，AI 自己學會了「圍堵」與「假動作」。
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mb-10">
+                        <div class="bg-white/5 border border-white/10 p-5 rounded-2xl relative overflow-hidden">
+                            <h3 class="text-white font-bold mb-2">AGENT 01: 覓食者</h3>
+                            <ul class="text-xs text-gray-400 space-y-2">
+                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> 目標：吃掉紅色食物 (+100分)
+                                </li>
+                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
+                                    弱點：被撞擊會遭受重罰 (-50分)</li>
+                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> 策略：靈活走位，避開獵殺者。
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white/10 border border-white/20 p-5 rounded-2xl relative overflow-hidden">
+                            <h3 class="text-white font-bold mb-2">AGENT 02: 狩獵者</h3>
+                            <ul class="text-xs text-gray-400 space-y-2">
+                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
+                                    目標：逼迫覓食者撞擊自己 (+200分)</li>
+                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
+                                    特性：吃食物不會變長，只有殺敵才會。</li>
+                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> 策略：預判路線，製造死路。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-10">
+                        <p class="text-xs font-mono text-gray-500 mb-4 uppercase tracking-widest text-center">Neural
+                            Network Architecture</p>
+                        <div
+                            class="flex items-center justify-between text-center text-[10px] md:text-xs text-gray-400 bg-white/5 p-4 rounded-xl border border-white/10">
+                            <div class="flex-1">
+                                <div class="mb-2 font-bold text-white">INPUT (15)</div>
+                                <div>WallDist, FoodDir,<br>EnemyPos</div>
+                            </div>
+                            <div class="text-gray-600">─────▶</div>
+                            <div class="flex-1">
+                                <div class="mb-2 font-bold text-white">HIDDEN LAYERS</div>
+                                <div>Linear(256) -> ReLU<br>Linear(128) -> ReLU</div>
+                            </div>
+                            <div class="text-gray-600">─────▶</div>
+                            <div class="flex-1">
+                                <div class="mb-2 font-bold text-white">OUTPUT (3)</div>
+                                <div>Action:<br>[Straight, Left, Right]</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="mt-8 bg-black/60 rounded-xl p-4 font-mono text-[11px] border border-white/5 shadow-inner">
+                        <div class="flex justify-between text-gray-500 mb-2 border-b border-white/5 pb-1">
+                            <span>TRAINING_LOG</span>
+                            <span>EPISODE 2450</span>
+                        </div>
+                        <p class="text-gray-400">$ python multi_snake_dqn.py --load_model=True</p>
+                        <p class="text-gray-300">Step 10240: Agent1 (Prey) ate food. Reward +100</p>
+                        <p class="text-gray-300">Step 10255: Agent2 (Hunter) calculated intercept path...</p>
+                        <p class="text-gray-300">Step 10260: Collision detected!</p>
+                        <p class="text-gray-300">>>> EVENT: Agent1 crashed into Agent2 body.</p>
+                        <p class="text-white">>>> WINNER: Agent2 (Reward +200) | Epsilon: 0.05</p>
+                    </div>
+                </div>
+
+<!--AI Gesture Dino-->
+                <div id="modal-panel-ai-dino" class="modal-panel hidden p-6 md:p-10">
+                    <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 bg-white/70 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+                            </div>
+                            <h2 class="font-mono text-2xl tracking-tight text-white">GESTURE_CONTROLLED_GAME</h2>
+                        </div>
+                        <button onclick="closeModal()"
+                            class="text-gray-400 hover:text-white transition-transform hover:rotate-90">✕</button>
+                    </div>
+
+                    <div class="mb-10 space-y-4">
+                        <p class="text-gray-300 leading-relaxed">
+                            結合 <span class="text-white font-bold">電腦視覺 (Computer Vision)</span> 與經典遊戲的創新專案。
+                            系統即時捕捉攝影機影像，透過 MediaPipe 推論出 21 個手部關鍵點，並利用 <span
+                                class="text-white border-b border-white/20">向量幾何</span> 計算手指彎曲角度，實現無接觸的遊戲體驗。
+                        </p>
+
+                        <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
+                            <p class="text-white font-bold flex items-center gap-2 mb-2"><span>📐</span> 核心演算法 (Vector
+                                Math)：</p>
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                為了精準判斷手指是「伸直」還是「彎曲」，程式計算指節向量之間的夾角。
+                                <br>公式：<code class="bg-black/50 px-1 rounded text-gray-300">Angle = acos( (v1⋅v2) /
+                                    (|v1|*|v2|) )</code>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-10">
+                        <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-center">
+                            <div class="text-4xl mb-2">🖐️</div>
+                            <h3 class="font-bold text-white mb-1">Gesture: HIGH FIVE</h3>
+                            <p class="text-xs text-gray-400">所有手指角度 &lt; 50°（伸直）</p>
+                            <div class="mt-3 bg-white text-black py-1 rounded font-bold text-sm">ACTION: JUMP (跳躍)</div>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-center">
+                            <div class="text-4xl mb-2">🤟</div>
+                            <h3 class="font-bold text-white mb-1">Gesture: SPIDER-MAN</h3>
+                            <p class="text-xs text-gray-400">特定手指彎曲（≥ 50°）</p>
+                            <div class="mt-3 bg-white/10 text-white py-1 rounded font-bold text-sm border border-white/20">
+                                ACTION: DUCK (蹲下)</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-10">
+                        <p class="text-xs font-mono text-gray-500 mb-4 uppercase tracking-widest text-center">Pipeline
+                            Architecture</p>
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] md:text-xs">
+                            <div class="flex-1 text-center p-3 rounded-lg bg-white/5 border border-white/10 text-gray-300">
+                                Webcam Input (cv2)
+                            </div>
+                            <div class="text-gray-600">→</div>
+                            <div class="flex-1 text-center p-3 rounded-lg bg-white/10 border border-white/20 text-white">
+                                MediaPipe Hands<br>(21 Landmarks)
+                            </div>
+                            <div class="text-gray-600">→</div>
+                            <div class="flex-1 text-center p-3 rounded-lg bg-white/10 border border-white/20 text-white">
+                                Angle Calculation<br>(Gesture Logic)
+                            </div>
+                            <div class="text-gray-600">→</div>
+                            <div class="flex-1 text-center p-3 rounded-lg bg-white/5 border border-white/10 text-gray-300">
+                                Pygame Event<br>(Keyboard Press)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="mt-8 bg-black/60 rounded-xl p-4 font-mono text-[11px] border border-white/5 shadow-inner">
+                        <div class="flex justify-between text-gray-500 mb-2 border-b border-white/5 pb-1">
+                            <span>CV_CONSOLE</span>
+                            <span>FPS: 30</span>
+                        </div>
+                        <p class="text-gray-400">$ python dino_ai.py</p>
+                        <p class="text-gray-300">>>> [INIT] MediaPipe Hands model loaded.</p>
+                        <p class="text-gray-300">>>> [CAM] Camera initialized (640x480).</p>
+                        <p class="text-gray-300">>>> [HAND] Landmarks detected. Calculating angles...</p>
+                        <p class="text-white">>>> [CMD] Gesture '5' recognized -> KEY_UP (Jump)</p>
+                        <p class="text-white">>>> [CMD] Gesture '3' recognized -> KEY_DOWN (Duck)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

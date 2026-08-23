@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matte Dark Glassmorphism | Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Space+Grotesk:wght@300;400;500;700&display=swap');
+
+        body {
+            background-color: #0A0A0A;
+            color: #ECECEC;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* 環境光暈：純白單色漫射光，僅暗示空間深度 */
+        .ambient-glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(140px);
+            z-index: -1;
+            pointer-events: none;
+            background: rgba(255, 255, 255, 0.045);
+        }
+
+        .glow-a {
+            width: 700px;
+            height: 700px;
+            top: -15%;
+            left: -10%;
+        }
+
+        .glow-b {
+            width: 700px;
+            height: 700px;
+            bottom: -20%;
+            right: -10%;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* 消光毛玻璃材質 */
+        .matte-glass {
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .matte-glass:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(24, 24, 24, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 24px rgba(255, 255, 255, 0.06);
+        }
+
+        .text-glow-white {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-white/20 selection:text-white">
+
+    <div class="ambient-glow glow-a"></div>
+    <div class="ambient-glow glow-b"></div>
+
+    <!-------------------------------------------------------------------------
+    導覽列 Navbar
+    ----------------------------------------------------------------------->
+    <nav class="fixed w-full z-50 p-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center matte-glass rounded-2xl px-8 py-4">
+            <span class="font-display text-xl tracking-widest text-white">PORTFOLIO</span>
+            <div class="hidden md:flex space-x-10 text-sm tracking-widest font-medium text-gray-400">
+                <a href="#" class="hover:text-white transition-colors">HOME</a>
+                <a href="#" class="hover:text-white transition-colors">ABOUT</a>
+                <a href="#" class="text-white text-glow-white transition-colors">PROJECTS</a>
+                <a href="#" class="hover:text-white transition-colors">SKILLS</a>
+                <a href="#" class="hover:text-white transition-colors">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-------------------------------------------------------------------------
+    Demo 內容
+    ----------------------------------------------------------------------->
+    <main class="min-h-screen flex flex-col items-center justify-center px-6 pt-32 pb-20">
+        <div class="max-w-6xl w-full">
+            <h1 class="font-display text-3xl md:text-4xl mb-2 text-white">
+                Matte Dark Glassmorphism
+            </h1>
+            <p class="text-gray-500 mb-14">純粹黑白毛玻璃風格 Demo — Navbar ＋ 精選專案卡片</p>
+
+            <div class="max-w-md">
+                <div class="matte-glass rounded-3xl p-8 group relative overflow-hidden">
+
+                    <div
+                        class="aspect-video bg-black/40 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-white/5">
+                        <span
+                            class="text-gray-500 font-mono tracking-widest text-xs uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            View System
+                        </span>
+                    </div>
+
+                    <p class="text-xs font-mono text-gray-500 uppercase tracking-widest mb-3">Featured Project</p>
+
+                    <h4 class="font-display text-2xl mb-3 text-white">
+                        無重複像素矩陣：QUBO 相片馬賽克生成引擎
+                    </h4>
+
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        將 35,000 張候選圖像透過 PCA 降維轉化為可解的 QUBO 模型，在 10,750 個目標網格中實現零重複的精準鑄嵌，達成極致視覺還原度。
+                    </p>
+
+                    <div class="flex gap-3 flex-wrap">
+                        <span
+                            class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded-full">PCA</span>
+                        <span
+                            class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded-full">QUBO</span>
+                        <span
+                            class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded-full">Combinatorial
+                            Optimization</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>
