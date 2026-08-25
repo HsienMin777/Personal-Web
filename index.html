@@ -196,8 +196,7 @@
                         倪咸民
                     </p>
                     <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-lg mx-auto md:mx-0">
-                        熱愛探索新知的開發者。
-就學期間專注於機器學習與量子啟發式運算，並積極擴充在 Python、C++ 與系統架構上的技術儲備。喜歡面對挑戰，永遠保持學習的熱忱！
+                        就讀期間主要投入機器學習與量子啟發式運算相關研究，平時以 Python、C 語言進行開發，也持續累積系統設計與實作經驗。對新技術保持好奇，喜歡從實際問題出發，嘗試不同的方法找到可行的解法。
                     </p>
                 </div>
 
@@ -652,7 +651,7 @@
                         </p>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4 mb-10">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                         <div class="bg-white/5 border border-white/10 p-5 rounded-2xl relative overflow-hidden">
                             <h3 class="text-white font-bold mb-2">AGENT 01: 覓食者</h3>
                             <ul class="text-xs text-gray-400 space-y-2">
@@ -682,17 +681,23 @@
                         <p class="text-xs font-mono text-gray-500 mb-4 uppercase tracking-widest text-center">Neural
                             Network Architecture</p>
                         <div
-                            class="flex items-center justify-between text-center text-[10px] md:text-xs text-gray-400 bg-white/5 p-4 rounded-xl border border-white/10">
+                            class="flex flex-col sm:flex-row items-center justify-between text-center text-[10px] md:text-xs text-gray-400 bg-white/5 p-4 rounded-xl border border-white/10 gap-3 sm:gap-0">
                             <div class="flex-1">
                                 <div class="mb-2 font-bold text-white">INPUT (15)</div>
                                 <div>WallDist, FoodDir,<br>EnemyPos</div>
                             </div>
-                            <div class="text-gray-600">─────▶</div>
+                            <div class="text-gray-600">
+                                <span class="sm:hidden">↓</span>
+                                <span class="hidden sm:inline">─────▶</span>
+                            </div>
                             <div class="flex-1">
                                 <div class="mb-2 font-bold text-white">HIDDEN LAYERS</div>
                                 <div>Linear(256) -> ReLU<br>Linear(128) -> ReLU</div>
                             </div>
-                            <div class="text-gray-600">─────▶</div>
+                            <div class="text-gray-600">
+                                <span class="sm:hidden">↓</span>
+                                <span class="hidden sm:inline">─────▶</span>
+                            </div>
                             <div class="flex-1">
                                 <div class="mb-2 font-bold text-white">OUTPUT (3)</div>
                                 <div>Action:<br>[Straight, Left, Right]</div>

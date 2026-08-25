@@ -811,8 +811,8 @@ video {
   cursor: pointer;
 }
 
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -1492,8 +1492,24 @@ video {
 }
 
 @media (min-width: 640px) {
+  .sm\:inline {
+    display: inline;
+  }
+
+  .sm\:hidden {
+    display: none;
+  }
+
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .sm\:flex-row {
     flex-direction: row;
+  }
+
+  .sm\:gap-0 {
+    gap: 0px;
   }
 }
 
