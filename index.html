@@ -232,10 +232,18 @@
             <span class="w-12 h-[2px] bg-white/40"></span> 精選專案
         </h3>
 
-        <div class="glass-card rounded-3xl p-10 md:p-14 mb-16" data-aos="fade-up">
+        <div class="glass-card rounded-3xl p-10 md:p-14 mb-16 cursor-pointer" onclick="openModal('offerdash')"
+            data-aos="fade-up">
             <p class="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Featured System</p>
-            <h4 class="font-mono text-2xl mb-3 text-white">AI Interview（內容待補）</h4>
-            <p class="text-gray-400">內容待補...</p>
+            <h4 class="font-mono text-3xl md:text-4xl mb-3 text-white">OfferDash</h4>
+            <p class="text-gray-400 mb-6">AI 驅動的一站式求職教練平台，從履歷健檢到面試復盤，全面追蹤求職進度。</p>
+            <div class="flex gap-3 flex-wrap">
+                <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">FastAPI</span>
+                <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">GPT-4o</span>
+                <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Supabase</span>
+                <span
+                    class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">APScheduler</span>
+            </div>
         </div>
 
         <div class="grid md:grid-cols-2 gap-10">
@@ -259,12 +267,13 @@
                 <h4 class="font-display text-2xl mb-3 text-white">
                     全方位遠端控制系統
                 </h4>
-                <p class="text-gray-400 mb-6">基於 Flask 打造，橋接 Web 介面與 Windows 系統底層，透過手機瀏覽器或 LINE Bot 即時操控電腦...</p>
+                <p class="text-gray-400 mb-6">用 Flask 打造的手機遙控介面：關機、推播新聞、觸控滑鼠、自動操作 ChatGPT，開機時還會主動把連線網址推播到 LINE...</p>
 
-                <div class="flex gap-3">
+                <div class="flex gap-3 flex-wrap">
                     <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Flask</span>
                     <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">PyAutoGUI</span>
-                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">LINE Bot</span>
+                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Flask-SocketIO</span>
+                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">LINE Messaging API</span>
                 </div>
             </div>
 
@@ -316,12 +325,13 @@
                 <h4 class="font-display text-2xl mb-3 text-white">
                     <span class="font-mono">AI</span> 雙蛇對抗賽局
                 </h4>
-                <p class="text-gray-400 mb-6">基於 Deep Q-Learning 的多智能體強化學習。訓練兩條蛇進行「追捕」與「逃脫」的非對稱博弈。</p>
+                <p class="text-gray-400 mb-6">兩個獨立訓練的 DQN 智能體、不對稱獎勵函數，在限時賽局中即死即生地持續互相博弈學習。</p>
 
-                <div class="flex gap-3">
+                <div class="flex gap-3 flex-wrap">
                     <span
                         class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">PyTorch</span>
                     <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">DQN</span>
+                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Docker</span>
                 </div>
             </div>
 
@@ -345,13 +355,15 @@
                 <h4 class="font-display text-2xl mb-3 text-white">
                     <span class="font-mono">AI</span> 體感恐龍跑酷
                 </h4>
-                <p class="text-gray-400 mb-6">丟掉鍵盤！透過 OpenCV 與 MediaPipe 捕捉手部骨架，用手勢隔空控制 Chrome 恐龍進行跳躍與蹲下。</p>
+                <p class="text-gray-400 mb-6">丟掉鍵盤！自製 Pygame 恐龍跑酷遊戲，用向量夾角判斷手勢，隔空控制跳躍與蹲下。</p>
 
-                <div class="flex gap-3">
+                <div class="flex gap-3 flex-wrap">
                     <span
                         class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">MediaPipe</span>
                     <span
                         class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">OpenCV</span>
+                    <span
+                        class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Pygame</span>
                 </div>
             </div>
         </div>
@@ -465,15 +477,16 @@
     <div class="relative mb-8 border-b border-white/10 pb-4 pr-12">
         <div class="flex items-center gap-3 min-w-0">
             <div class="w-3 h-3 bg-white/70 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>
-            <h2 class="font-mono text-lg sm:text-2xl tracking-tight text-white break-words min-w-0">IOT_REMOTE_CONTROLLER</h2>
+            <h2 class="font-mono text-lg sm:text-2xl tracking-tight text-white break-words min-w-0">PHONE_ASSISTANT</h2>
         </div>
         <button onclick="closeModal()" class="absolute top-0 right-0 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white transition-transform hover:rotate-90">✕</button>
     </div>
 <!--Remote Controller-->
     <div class="mb-10 space-y-4">
         <p class="text-gray-300 leading-relaxed">
-            這是一個基於 Flask 架構的 <span class="text-white font-bold">全方位遠端控制系統</span>。
-            它成功橋接了 Web 介面與 Windows 系統底層，讓使用者能透過手機瀏覽器或 <span class="text-white font-bold font-mono">LINE Bot</span> 即時操控電腦。
+            這是一套用 <span class="text-white font-bold">Flask</span> 打造的「手機即遙控器」系統。
+            手機瀏覽器打開一個網頁，就能對電腦下達關機、開網頁、推播新聞、觸控拖曳滑鼠、甚至操作 ChatGPT 等指令——伺服器一啟動就會主動用
+            <span class="text-white font-bold font-mono">LINE</span> 推播區網連線網址，不用手動查 IP。
         </p>
 
         <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
@@ -482,12 +495,20 @@
             </p>
             <ul class="text-sm text-gray-400 space-y-2">
                 <li>
-                    <strong class="text-gray-200">硬體層控制 (PyAutoGUI)：</strong>
-                    實作虛擬觸控板，透過 WebSocket/SocketIO 傳輸座標，達成低延遲的遠端滑鼠與視窗管理 (Alt+F4)。
+                    <strong class="text-gray-200">區網 IP 自動探測：</strong>
+                    用 UDP socket 對 8.8.8.8:80 發起連線但不實際送出資料，單純借助作業系統的路由判斷取得目前對外的本機 IP，開機即可自動組出手機要連線的網址。
                 </li>
                 <li>
-                    <strong class="text-gray-200">自動化與爬蟲：</strong>
-                    整合 Selenium 自動喚醒 ChatGPT 並自動輸入內容，同時結合 BeautifulSoup 抓取 CNA 即時新聞並推送至 LINE。
+                    <strong class="text-gray-200">視窗層級的關機前清理：</strong>
+                    透過 pygetwindow 列舉所有視窗，用標題關鍵字白名單保留自己的伺服器主控台，其餘視窗依序 Alt+F4 並自動確認，模擬「關機前先收乾淨」的操作。
+                </li>
+                <li>
+                    <strong class="text-gray-200">兩種滑鼠遠端控制實作：</strong>
+                    一開始用 HTTP 輪詢（每次觸控移動就 fetch 一次 /mouse_move），後續改寫成 Flask-SocketIO 版本的觸控板，改用單一 WebSocket 連線傳輸座標差量，降低逐次請求的延遲。
+                </li>
+                <li>
+                    <strong class="text-gray-200">UI 層級的 ChatGPT 自動化：</strong>
+                    沒有申請 API，而是直接開啟瀏覽器分頁、模擬剪貼簿貼上與 Enter 按鍵，用「操作介面」的方式間接串接 ChatGPT。
                 </li>
             </ul>
         </div>
@@ -498,34 +519,22 @@
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
                 <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">USER</span>
-                <p class="text-sm font-bold text-white mb-1">手機 Web/LINE</p>
+                <p class="text-sm font-bold text-white mb-1">手機 Web 介面</p>
                 <p class="text-[10px] text-gray-400">發送控制指令</p>
             </div>
             <div class="text-gray-500">→</div>
             <div class="flex-1 text-center p-4 rounded-xl bg-white/10 border border-white/20 relative">
                 <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">FLASK</span>
-                <p class="text-sm font-bold text-white mb-1">指令路由解析</p>
-                <p class="text-[10px] text-gray-300">處理 Socket/Fetch</p>
+                <p class="text-sm font-bold text-white mb-1">路由解析</p>
+                <p class="text-[10px] text-gray-300">/run、/mouse_move、SocketIO</p>
             </div>
             <div class="text-gray-500">→</div>
             <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
                 <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">OS</span>
                 <p class="text-sm font-bold text-white mb-1">系統層執行</p>
-                <p class="text-[10px] text-gray-400">滑鼠/關機/ChatGPT</p>
+                <p class="text-[10px] text-gray-400">滑鼠／視窗／瀏覽器</p>
             </div>
         </div>
-    </div>
-
-    <div class="mt-8 bg-black/60 rounded-xl p-4 font-mono text-[11px] border border-white/5 shadow-inner">
-        <div class="flex justify-between text-gray-500 mb-2 border-b border-white/5 pb-1">
-            <span>FLASK_SERVER_LOG</span>
-            <span>PORT: 5000</span>
-        </div>
-        <p class="text-gray-400">$ python main.py</p>
-        <p class="text-gray-300">>>> [IP] Server started on http://192.168.1.xxx:5000</p>
-        <p class="text-gray-300">>>> [CMD] Received: 'mouse_move' dx=10, dy=-5</p>
-        <p class="text-gray-300">>>> [LINE] Pushing latest CNA News to User U2317f...</p>
-        <p class="text-white">>>> [GPT] Launching Selenium automation session...</p>
     </div>
 </div>
 <!--SQL to Text-->
@@ -618,17 +627,6 @@
                         </p>
                     </div>
                 </div>
-
-                <div class="mt-8 bg-black/60 rounded-xl p-4 font-mono text-[11px] border border-white/5">
-                    <div class="flex justify-between text-gray-500 mb-2 border-b border-white/5 pb-1">
-                        <span>TERMINAL_OUTPUT</span>
-                        <span>UTF-8</span>
-                    </div>
-                    <p class="text-gray-400">$ python agent.py</p>
-                    <p class="text-gray-300">>>> [INFO] 偵測到敏感詞 "Jason" -> 替換為 [SECRET_VALUE_0]</p>
-                    <p class="text-gray-300">>>> [AI] 產生 SQL 語法：SELECT email FROM users...</p>
-                    <p class="text-white">>>> [DB] 執行成功，回傳結果：jason@school.edu.tw</p>
-                </div>
                 </div>
 
 <!--AI Dual Snake-->
@@ -645,11 +643,35 @@
 
                     <div class="mb-10 space-y-4">
                         <p class="text-gray-300 leading-relaxed">
-                            這不是普通的貪吃蛇。這是一個 <span class="text-white font-bold">強化學習 (RL)</span> 實驗場。
-                            我們訓練了兩個獨立的神經網路大腦，讓它們在封閉空間中進行 <span
-                                class="text-white border-b border-white/20">非對稱對抗</span>。
-                            沒有人類規則，只有獎勵與懲罰，AI 自己學會了「圍堵」與「假動作」。
+                            這不是普通的貪吃蛇。這是一個 <span class="text-white font-bold">多智能體強化學習 (Multi-Agent RL)</span> 實驗場。
+                            兩個完全獨立的 DQN 大腦（各自的網路、記憶庫、優化器）在同一張地圖上進行 <span
+                                class="text-white border-b border-white/20">非對稱對抗</span>：
+                            沒有人類寫死的規則，只有獎勵與懲罰，AI 自己學會了「圍堵」與「卡位」。
                         </p>
+
+                        <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
+                            <p class="text-white font-bold flex items-center gap-2 mb-2">
+                                <span>⚙️</span> 關鍵設計決策：
+                            </p>
+                            <ul class="text-sm text-gray-400 space-y-2">
+                                <li>
+                                    <strong class="text-gray-200">相對動作空間：</strong>
+                                    動作只有「直行／左轉／右轉」三種，而非絕對的上下左右，從結構上排除「180 度回頭自撞」這種無效動作。
+                                </li>
+                                <li>
+                                    <strong class="text-gray-200">即死即生的限時賽局：</strong>
+                                    整場比賽固定 5 分鐘，死亡立即在原點重生並保留分數，讓兩個 agent 能在同一局裡持續互動、大量取樣，不必每次死亡就重啟環境。
+                                </li>
+                                <li>
+                                    <strong class="text-gray-200">不對稱資訊與獎勵：</strong>
+                                    狩獵者額外接收「對手目前移動方向」作為輸入，且吃食物不會變長——只有成功阻擋才會變長，避免身體過長反而拖累近戰靈活度。
+                                </li>
+                                <li>
+                                    <strong class="text-gray-200">Headless 容器化訓練：</strong>
+                                    用 Docker 打包，透過 <code class="bg-black/50 px-1 rounded text-gray-300">SDL_VIDEODRIVER=dummy</code> 讓 Pygame 在無畫面的伺服器環境下也能訓練。
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
@@ -659,8 +681,8 @@
                                 <li class="flex items-start gap-2"><span class="text-gray-500">●</span> 目標：吃掉紅色食物 (+100分)
                                 </li>
                                 <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
-                                    弱點：被撞擊會遭受重罰 (-50分)</li>
-                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> 策略：靈活走位，避開獵殺者。
+                                    弱點：一般死亡 -50 分，但被狩獵者「卡死」撞上其身體，懲罰加重到 -100 分</li>
+                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> 感知：食物相對自己的方位（上下左右）。
                                 </li>
                             </ul>
                         </div>
@@ -669,11 +691,11 @@
                             <h3 class="text-white font-bold mb-2">AGENT 02: 狩獵者</h3>
                             <ul class="text-xs text-gray-400 space-y-2">
                                 <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
-                                    目標：逼迫覓食者撞擊自己 (+200分)</li>
+                                    目標：逼迫覓食者撞上自己身體 (+200分)，頭對頭擊殺 (+100分)</li>
                                 <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
-                                    特性：吃食物不會變長，只有殺敵才會。</li>
-                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> 策略：預判路線，製造死路。
-                                </li>
+                                    特性：吃食物不會變長，只有成功阻擋才會，避免身體過長拖累近戰靈活度。</li>
+                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
+                                    感知：多了對手目前的移動方向，比覓食者多一份資訊優勢。</li>
                             </ul>
                         </div>
                     </div>
@@ -685,7 +707,7 @@
                             class="flex flex-col sm:flex-row items-center justify-between text-center text-[10px] md:text-xs text-gray-400 bg-white/5 p-4 rounded-xl border border-white/10 gap-3 sm:gap-0">
                             <div class="flex-1">
                                 <div class="mb-2 font-bold text-white">INPUT (15)</div>
-                                <div>WallDist, FoodDir,<br>EnemyPos</div>
+                                <div>Danger×3, Dir×4,<br>Target×4, EnemyDir×4</div>
                             </div>
                             <div class="text-gray-600">
                                 <span class="sm:hidden">↓</span>
@@ -705,20 +727,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div
-                        class="mt-8 bg-black/60 rounded-xl p-4 font-mono text-[11px] border border-white/5 shadow-inner">
-                        <div class="flex justify-between text-gray-500 mb-2 border-b border-white/5 pb-1">
-                            <span>TRAINING_LOG</span>
-                            <span>EPISODE 2450</span>
-                        </div>
-                        <p class="text-gray-400">$ python multi_snake_dqn.py --load_model=True</p>
-                        <p class="text-gray-300">Step 10240: Agent1 (Prey) ate food. Reward +100</p>
-                        <p class="text-gray-300">Step 10255: Agent2 (Hunter) calculated intercept path...</p>
-                        <p class="text-gray-300">Step 10260: Collision detected!</p>
-                        <p class="text-gray-300">>>> EVENT: Agent1 crashed into Agent2 body.</p>
-                        <p class="text-white">>>> WINNER: Agent2 (Reward +200) | Epsilon: 0.05</p>
-                    </div>
                 </div>
 
 <!--AI Gesture Dino-->
@@ -735,18 +743,29 @@
 
                     <div class="mb-10 space-y-4">
                         <p class="text-gray-300 leading-relaxed">
-                            結合 <span class="text-white font-bold">電腦視覺 (Computer Vision)</span> 與經典遊戲的創新專案。
+                            自製的 <span class="text-white font-bold">Pygame 恐龍跑酷遊戲</span>，用手勢取代鍵盤操作。
                             系統即時捕捉攝影機影像，透過 MediaPipe 推論出 21 個手部關鍵點，並利用 <span
-                                class="text-white border-b border-white/20">向量幾何</span> 計算手指彎曲角度，實現無接觸的遊戲體驗。
+                                class="text-white border-b border-white/20">向量幾何</span> 計算每根手指的彎曲角度，實現無接觸的遊戲體驗。
                         </p>
 
                         <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
                             <p class="text-white font-bold flex items-center gap-2 mb-2"><span>📐</span> 核心演算法 (Vector
                                 Math)：</p>
                             <p class="text-sm text-gray-400 leading-relaxed">
-                                為了精準判斷手指是「伸直」還是「彎曲」，程式計算指節向量之間的夾角。
+                                為了精準判斷手指是「伸直」還是「彎曲」，程式計算指節向量之間的夾角，並以 50° 為閾值分類，超過即視為彎曲。
                                 <br>公式：<code class="bg-black/50 px-1 rounded text-gray-300">Angle = acos( (v1⋅v2) /
                                     (|v1|*|v2|) )</code>
+                            </p>
+                        </div>
+
+                        <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
+                            <p class="text-white font-bold flex items-center gap-2 mb-2"><span>🔗</span> 跨執行緒的輸入橋接：</p>
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                手勢辨識與遊戲主迴圈是兩套獨立邏輯，中間沒有自建的訊息傳遞機制。做法是用
+                                <code class="bg-black/50 px-1 rounded text-gray-300">keyboard</code>
+                                函式庫在偵測到手勢的瞬間，於作業系統層級模擬一次真實按鍵事件，讓 Pygame 視窗透過
+                                <code class="bg-black/50 px-1 rounded text-gray-300">pygame.key.get_pressed()</code>
+                                直接讀到這個「假鍵盤輸入」，等同於玩家真的按下了方向鍵。
                             </p>
                         </div>
                     </div>
@@ -754,14 +773,14 @@
                     <div class="grid md:grid-cols-2 gap-6 mb-10">
                         <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-center">
                             <div class="text-4xl mb-2">🖐️</div>
-                            <h3 class="font-bold text-white mb-1">Gesture: HIGH FIVE</h3>
-                            <p class="text-xs text-gray-400">所有手指角度 &lt; 50°（伸直）</p>
+                            <h3 class="font-bold text-white mb-1">Gesture: 五指全開</h3>
+                            <p class="text-xs text-gray-400">五根手指角度皆 &lt; 50°（全部伸直）</p>
                             <div class="mt-3 bg-white text-black py-1 rounded font-bold text-sm">ACTION: JUMP (跳躍)</div>
                         </div>
                         <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-center">
-                            <div class="text-4xl mb-2">🤟</div>
-                            <h3 class="font-bold text-white mb-1">Gesture: SPIDER-MAN</h3>
-                            <p class="text-xs text-gray-400">特定手指彎曲（≥ 50°）</p>
+                            <div class="text-4xl mb-2 font-mono">3</div>
+                            <h3 class="font-bold text-white mb-1">Gesture: 食中無名指伸直</h3>
+                            <p class="text-xs text-gray-400">拇指、小指彎曲（≥ 50°），其餘伸直</p>
                             <div class="mt-3 bg-white/10 text-white py-1 rounded font-bold text-sm border border-white/20">
                                 ACTION: DUCK (蹲下)</div>
                         </div>
@@ -788,19 +807,102 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div
-                        class="mt-8 bg-black/60 rounded-xl p-4 font-mono text-[11px] border border-white/5 shadow-inner">
-                        <div class="flex justify-between text-gray-500 mb-2 border-b border-white/5 pb-1">
-                            <span>CV_CONSOLE</span>
-                            <span>FPS: 30</span>
+<!--OfferDash-->
+                <div id="modal-panel-offerdash" class="modal-panel hidden p-6 md:p-10">
+                    <div class="relative mb-8 border-b border-white/10 pb-4 pr-12">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <div class="w-3 h-3 bg-white/70 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+                            </div>
+                            <h2 class="font-mono text-lg sm:text-2xl tracking-tight text-white break-words min-w-0">
+                                OFFERDASH_AI_COACH</h2>
                         </div>
-                        <p class="text-gray-400">$ python dino_ai.py</p>
-                        <p class="text-gray-300">>>> [INIT] MediaPipe Hands model loaded.</p>
-                        <p class="text-gray-300">>>> [CAM] Camera initialized (640x480).</p>
-                        <p class="text-gray-300">>>> [HAND] Landmarks detected. Calculating angles...</p>
-                        <p class="text-white">>>> [CMD] Gesture '5' recognized -> KEY_UP (Jump)</p>
-                        <p class="text-white">>>> [CMD] Gesture '3' recognized -> KEY_DOWN (Duck)</p>
+                        <button onclick="closeModal()"
+                            class="absolute top-0 right-0 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white transition-transform hover:rotate-90">✕</button>
+                    </div>
+
+                    <div class="mb-10 space-y-4">
+                        <p class="text-gray-300 leading-relaxed">
+                            <span class="text-white font-bold font-mono">OfferDash</span> 是一套
+                            <span class="text-white font-bold">AI 驅動的一站式求職教練平台</span>，從履歷健檢、模擬面試到面試復盤，全面追蹤使用者的求職進度。
+                        </p>
+
+                        <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
+                            <p class="text-white font-bold flex items-center gap-2 mb-2">
+                                <span>🌟</span> 核心亮點與技術實現：
+                            </p>
+                            <ul class="text-sm text-gray-400 space-y-3">
+                                <li>
+                                    <strong class="text-gray-200">沉浸式 AI 模擬面試（Voice-Interactive AI
+                                        Interview）：</strong>
+                                    摒棄純文字對話，整合 OpenAI TTS（onyx 音色）與瀏覽器原生 Web Speech API（並以 Whisper 作為備援），打造全語音的擬真面試戰場，可根據上傳的
+                                    PDF 履歷與 JD 動態生成客製化追問。
+                                </li>
+                                <li>
+                                    <strong class="text-gray-200">履歷 × JD 雙向診斷系統（ATS Match &
+                                        Diagnosis）：</strong>
+                                    運用 GPT-4o 分析履歷與職缺描述，產出 ATS 契合度分數，並嚴格要求 LLM 基於原文總結以避免幻覺，精準預測面試官意圖與必考題。
+                                </li>
+                                <li>
+                                    <strong class="text-gray-200">遊戲化復盤與成長機制（Gamified Feedback
+                                        System）：</strong>
+                                    面試後自動生成復盤報告，抓出「最弱的 3 個回答」轉化為「翻盤任務」，依據產業別給予重答策略，引導使用者針對弱點刻意練習。
+                                </li>
+                                <li>
+                                    <strong class="text-gray-200">非同步面試管家（Asynchronous Interview
+                                        Calendar）：</strong>
+                                    內建行事曆系統，面試前 2 小時自動寄送含 AI 激勵語錄的提醒信。為避免寄信當下呼叫 LLM 造成超時失敗，信件內容在建立行程當下即非同步預先生成並存入
+                                    Supabase，確保 APScheduler 背景排程能穩定準時觸發寄送。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-10">
+                        <p class="text-xs font-mono text-gray-500 mb-4 uppercase tracking-widest text-center">System
+                            Architecture</p>
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                                <span
+                                    class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">INPUT</span>
+                                <p class="text-sm font-bold text-white mb-1">履歷 PDF + JD</p>
+                                <p class="text-[10px] text-gray-400">使用者上傳資料</p>
+                            </div>
+                            <div class="text-gray-500">→</div>
+                            <div
+                                class="flex-1 text-center p-4 rounded-xl bg-white/10 border border-white/20 relative">
+                                <span
+                                    class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">AI
+                                    ENGINE</span>
+                                <p class="text-sm font-bold text-white mb-1">GPT-4o 診斷 + 語音面試</p>
+                                <p class="text-[10px] text-gray-300">TTS / Whisper 即時互動</p>
+                            </div>
+                            <div class="text-gray-500">→</div>
+                            <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                                <span
+                                    class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">OUTPUT</span>
+                                <p class="text-sm font-bold text-white mb-1">復盤報告 + 提醒信</p>
+                                <p class="text-[10px] text-gray-400">APScheduler 非同步排程</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-xs font-mono text-gray-500 mb-4 uppercase tracking-widest text-center">Tech
+                            Stack</p>
+                        <div class="flex gap-2 flex-wrap justify-center">
+                            <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Python</span>
+                            <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">FastAPI</span>
+                            <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">SQLAlchemy</span>
+                            <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">APScheduler</span>
+                            <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Supabase</span>
+                            <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">GPT-4o</span>
+                            <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Whisper</span>
+                            <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">TTS-1</span>
+                            <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Render</span>
+                            <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Vercel</span>
+                        </div>
                     </div>
                 </div>
             </div>
