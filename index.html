@@ -323,14 +323,16 @@
                 </div>
 
                 <h4 class="font-display text-2xl mb-3 text-white">
-                    <span class="font-mono">AI</span> 雙蛇對抗賽局
+                    <span class="font-mono">Multi-Agent Snake DQN</span>：Hunter vs. Gatherer
                 </h4>
-                <p class="text-gray-400 mb-6">兩個獨立訓練的 DQN 智能體、不對稱獎勵函數，在限時賽局中即死即生地持續互相博弈學習。</p>
+                <p class="text-gray-400 mb-6">基於 Pygame 與 PyTorch 打造的多智能體強化學習 (MARL) 實驗環境，探討非對稱目標下的 AI 策略演化。</p>
 
                 <div class="flex gap-3 flex-wrap">
                     <span
                         class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">PyTorch</span>
-                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">DQN</span>
+                    <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">DQN</span>
+                    <span
+                        class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Pygame</span>
                     <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Docker</span>
                 </div>
             </div>
@@ -637,7 +639,7 @@
                         <div class="flex items-center gap-3 min-w-0">
                             <div class="w-3 h-3 bg-white/70 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.5)]">
                             </div>
-                            <h2 class="font-mono text-lg sm:text-2xl tracking-tight text-white break-words min-w-0">DUAL_AGENT_DQN</h2>
+                            <h2 class="font-mono text-lg sm:text-2xl tracking-tight text-white break-words min-w-0">SNAKE_MARL_DQN</h2>
                         </div>
                         <button onclick="closeModal()"
                             class="absolute top-0 right-0 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white transition-transform hover:rotate-90">✕</button>
@@ -645,32 +647,38 @@
 
                     <div class="mb-10 space-y-4">
                         <p class="text-gray-300 leading-relaxed">
-                            這不是普通的貪吃蛇。這是一個 <span class="text-white font-bold">多智能體強化學習 (Multi-Agent RL)</span> 實驗場。
-                            兩個完全獨立的 DQN 大腦（各自的網路、記憶庫、優化器）在同一張地圖上進行 <span
-                                class="text-white border-b border-white/20">非對稱對抗</span>：
-                            沒有人類寫死的規則，只有獎勵與懲罰，AI 自己學會了「圍堵」與「卡位」。
+                            基於 <span class="text-white font-bold font-mono">Pygame</span> 與
+                            <span class="text-white font-bold font-mono">PyTorch</span> 打造的
+                            <span class="text-white font-bold">多智能體強化學習 (MARL)</span> 實驗環境，探討非對稱目標下的 AI 策略演化。
                         </p>
 
                         <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
                             <p class="text-white font-bold flex items-center gap-2 mb-2">
-                                <span>⚙️</span> 關鍵設計決策：
+                                <span>🌟</span> 核心亮點與技術實現：
                             </p>
-                            <ul class="text-sm text-gray-400 space-y-2">
+                            <ul class="text-sm text-gray-400 space-y-3">
                                 <li>
-                                    <strong class="text-gray-200">相對動作空間：</strong>
-                                    動作只有「直行／左轉／右轉」三種，而非絕對的上下左右，從結構上排除「180 度回頭自撞」這種無效動作。
+                                    <strong class="text-gray-200">多智能體非對稱對抗（Asymmetric MARL）：</strong>
+                                    設計兩種截然不同的 AI 角色——採集者（Gatherer／藍蛇）目標是盡可能吃掉紅色食物以增加長度；獵人（Hunter／綠蛇）對食物免疫且無感，唯一目標是攔截、封鎖或擊殺採集者，藉由逼迫對手撞上自己的身體來獲取分數與成長。
                                 </li>
                                 <li>
-                                    <strong class="text-gray-200">即死即生的限時賽局：</strong>
-                                    整場比賽固定 5 分鐘，死亡立即在原點重生並保留分數，讓兩個 agent 能在同一局裡持續互動、大量取樣，不必每次死亡就重啟環境。
+                                    <strong class="text-gray-200">深度 Q 網路架構（DQN Architecture）：</strong>
+                                    系統中包含兩個完全獨立的 AI 模型，各自擁有網路結構 3-layer MLP（15 → 256 → 128 →
+                                    3），以及穩定機制：容量達 20,000 筆的 Experience Replay Buffer，Target Network 每 1,000
+                                    步同步一次，搭配 Adam Optimizer（梯度裁剪截斷）確保模型收斂。
                                 </li>
                                 <li>
-                                    <strong class="text-gray-200">不對稱資訊與獎勵：</strong>
-                                    狩獵者額外接收「對手目前移動方向」作為輸入，且吃食物不會變長——只有成功阻擋才會變長，避免身體過長反而拖累近戰靈活度。
+                                    <strong class="text-gray-200">狀態空間與獎勵工程（State Space & Reward
+                                        Shaping）：</strong>
+                                    賦予 AI 15 個特徵維度的感知能力，包含前方／左右障礙物判斷、自身方向、目標相對方位，以及對手的移動方向。透過精心調校的 Reward
+                                    Function（例如獵人成功肉身封鎖對手給予 +200 激勵），有效解決稀疏獎勵問題。
                                 </li>
                                 <li>
-                                    <strong class="text-gray-200">Headless 容器化訓練：</strong>
-                                    用 Docker 打包，透過 <code class="bg-black/50 px-1 rounded text-gray-300">SDL_VIDEODRIVER=dummy</code> 讓 Pygame 在無畫面的伺服器環境下也能訓練。
+                                    <strong class="text-gray-200">容器化無頭訓練環境（Dockerized Headless
+                                        Training）：</strong>
+                                    除了支援本機 Pygame 視覺化即時渲染外，也撰寫了 Dockerfile 與 docker-compose.yml，透過
+                                    <code class="bg-black/50 px-1 rounded text-gray-300">SDL_VIDEODRIVER=dummy</code>
+                                    實作無頭模式（Headless），方便在背景或雲端伺服器進行長時間的自動化對局訓練。
                                 </li>
                             </ul>
                         </div>
@@ -678,26 +686,26 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                         <div class="bg-white/5 border border-white/10 p-5 rounded-2xl relative overflow-hidden">
-                            <h3 class="text-white font-bold mb-2">AGENT 01: 覓食者</h3>
+                            <h3 class="text-white font-bold mb-2">GATHERER：採集者（藍蛇）</h3>
                             <ul class="text-xs text-gray-400 space-y-2">
-                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> 目標：吃掉紅色食物 (+100分)
+                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> 目標：盡可能吃掉紅色食物以增加長度
                                 </li>
                                 <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
-                                    弱點：一般死亡 -50 分，但被狩獵者「卡死」撞上其身體，懲罰加重到 -100 分</li>
-                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> 感知：食物相對自己的方位（上下左右）。
+                                    弱點：一般死亡扣分，被獵人逼迫撞上其身體時懲罰更重</li>
+                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> 感知：食物相對自己的方位。
                                 </li>
                             </ul>
                         </div>
 
                         <div class="bg-white/10 border border-white/20 p-5 rounded-2xl relative overflow-hidden">
-                            <h3 class="text-white font-bold mb-2">AGENT 02: 狩獵者</h3>
+                            <h3 class="text-white font-bold mb-2">HUNTER：獵人（綠蛇）</h3>
                             <ul class="text-xs text-gray-400 space-y-2">
                                 <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
-                                    目標：逼迫覓食者撞上自己身體 (+200分)，頭對頭擊殺 (+100分)</li>
+                                    目標：攔截、封鎖或擊殺採集者，逼迫對手撞上自己身體 (+200分)</li>
                                 <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
-                                    特性：吃食物不會變長，只有成功阻擋才會，避免身體過長拖累近戰靈活度。</li>
+                                    特性：對食物免疫且無感，只有成功阻擋才會成長。</li>
                                 <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
-                                    感知：多了對手目前的移動方向，比覓食者多一份資訊優勢。</li>
+                                    感知：多了對手目前的移動方向，比採集者多一份資訊優勢。</li>
                             </ul>
                         </div>
                     </div>
