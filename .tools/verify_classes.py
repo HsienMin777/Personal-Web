@@ -21,9 +21,6 @@ custom_classes = {
     'modal-panel', 'modal-active', 'modal-overlay', 'custom-scrollbar',
     'ambient-glow', 'glow-a', 'glow-b', 'matte-glass', 'group', 'hidden',
     'text-accent-gold',
-    'project-card', 'project-card-action', 'project-card-arrow',
-    'status-dot', 'status-active', 'status-experimental',
-    'status-development', 'status-archived',
 }
 
 css_text = open('tailwind.css', encoding='utf-8').read()
