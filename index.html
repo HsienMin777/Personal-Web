@@ -38,6 +38,24 @@
             font-family: 'Playfair Display', serif;
         }
 
+        /* 中英文切換：預設顯示中文，html 加上 .lang-en 後切換成英文 */
+        .lang-en {
+            display: none;
+        }
+
+        html.lang-en .lang-en {
+            display: inline;
+        }
+
+        html.lang-en .lang-zh {
+            display: none;
+        }
+
+        .lang-toggle-btn {
+            font-family: 'Space Grotesk', monospace;
+            letter-spacing: 0.05em;
+        }
+
         /* 環境光暈：純白單色漫射光，僅暗示空間深度 */
         .blob {
             position: absolute;
@@ -134,6 +152,12 @@
             background: rgba(255, 255, 255, 0.4);
         }
     </style>
+    <script>
+        // 提早套用語言偏好，避免切換到英文時畫面先閃一下中文
+        if (localStorage.getItem('site-lang') === 'en') {
+            document.documentElement.classList.add('lang-en');
+        }
+    </script>
 </head>
 
 <body class="selection:bg-white/20 selection:text-white">
@@ -150,14 +174,24 @@
         <div class="max-w-6xl mx-auto glass-card rounded-2xl">
             <div class="flex justify-between items-center px-6 md:px-8 py-4">
                 <div class="font-mono text-lg md:text-xl tracking-widest text-white">Personal Web</div>
-                <div class="hidden md:flex space-x-10 text-sm tracking-widest font-medium font-mono text-gray-400">
+                <div class="hidden md:flex items-center space-x-10 text-sm tracking-widest font-medium font-mono text-gray-400">
                     <a href="#home" class="hover:text-white transition-colors">HOME</a>
                     <a href="about.html" class="hover:text-white transition-colors">ABOUT</a>
                     <a href="#work" class="hover:text-white transition-colors">PROJECTS</a>
                     <a href="#contact" class="hover:text-white transition-colors"
                         onclick="scrollToCenter(event, 'contact')">CONTACT</a>
+                    <button onclick="toggleLang()" aria-label="Switch language"
+                        class="lang-toggle-btn text-xs border border-white/20 hover:border-white/50 hover:text-white transition-colors px-3 py-1.5 rounded-full">
+                        <span class="lang-zh">EN</span><span class="lang-en">中文</span>
+                    </button>
                 </div>
-                <button onclick="toggleNav()" aria-label="Menu" class="md:hidden text-white text-2xl leading-none px-1">☰</button>
+                <div class="flex items-center gap-3 md:hidden">
+                    <button onclick="toggleLang()" aria-label="Switch language"
+                        class="lang-toggle-btn text-xs font-mono text-gray-400 hover:text-white transition-colors border border-white/20 hover:border-white/50 px-2.5 py-1 rounded-full">
+                        <span class="lang-zh">EN</span><span class="lang-en">中文</span>
+                    </button>
+                    <button onclick="toggleNav()" aria-label="Menu" class="text-white text-2xl leading-none px-1">☰</button>
+                </div>
             </div>
             <div id="mobile-nav" class="hidden flex-col md:hidden px-6 pb-4 space-y-4 text-sm tracking-widest font-medium font-mono text-gray-400">
                 <a href="#home" class="hover:text-white transition-colors" onclick="toggleNav()">HOME</a>
@@ -199,18 +233,18 @@
                         倪咸民
                     </p>
                     <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-lg mx-auto md:mx-0">
-                        就讀期間主要投入機器學習與量子啟發式運算相關研究，平時以 Python、C 語言進行開發，也持續累積系統設計與實作經驗。對新技術保持好奇，喜歡從實際問題出發，嘗試不同的方法找到可行的解法。
+                        <span class="lang-zh">就讀期間主要投入機器學習與量子啟發式運算相關研究，平時以 Python、C 語言進行開發，也持續累積系統設計與實作經驗。對新技術保持好奇，喜歡從實際問題出發，嘗試不同的方法找到可行的解法。</span><span class="lang-en">Currently focused on research in machine learning and quantum-inspired computing, developing primarily in Python and C while building up experience in system design and implementation. Curious about new technologies, and drawn to starting from real problems and trying different approaches until something works.</span>
                     </p>
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                     <a href="#work"
                         class="bg-white hover:bg-gray-200 text-black font-bold py-3 px-8 rounded-full transition-all shadow-[0_0_15px_rgba(255,255,255,0.15)] text-center">
-                        查看專案
+                        <span class="lang-zh">查看專案</span><span class="lang-en">View Projects</span>
                     </a>
                     <a href="#contact" onclick="scrollToCenter(event, 'contact')"
                         class="border border-white/20 hover:border-white/60 py-3 px-8 rounded-full transition-all backdrop-blur-md text-center">
-                        聯絡合作
+                        <span class="lang-zh">聯絡合作</span><span class="lang-en">Get in Touch</span>
                     </a>
                 </div>
             </div>
@@ -231,14 +265,14 @@
 
     <section id="work" class="pt-16 pb-32 px-6 max-w-6xl mx-auto">
         <h3 class="font-display text-4xl mb-16 flex items-center gap-4" data-aos="fade-right">
-            <span class="w-12 h-[2px] bg-white/40"></span> 精選專案
+            <span class="w-12 h-[2px] bg-white/40"></span> <span class="lang-zh">精選專案</span><span class="lang-en">Featured Projects</span>
         </h3>
 
         <div class="glass-card rounded-3xl p-10 md:p-14 mb-16 cursor-pointer" onclick="openModal('offerdash')"
             data-aos="fade-up">
             <p class="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Featured System</p>
             <h4 class="font-mono text-3xl md:text-4xl mb-3 text-white">OfferDash</h4>
-            <p class="text-gray-400 mb-6 leading-[2]">AI 驅動的一站式求職教練平台，從履歷健檢到面試復盤，全面追蹤求職進度。</p>
+            <p class="text-gray-400 mb-6 leading-[2]"><span class="lang-zh">AI 驅動的一站式求職教練平台，從履歷健檢到面試復盤，全面追蹤求職進度。</span><span class="lang-en">An AI-driven, all-in-one job-hunting coach platform — tracking your job search end to end, from resume health checks to post-interview reviews.</span></p>
             <div class="flex gap-3 flex-wrap">
                 <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">FastAPI</span>
                 <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">GPT-4o</span>
@@ -267,9 +301,9 @@
                 </div>
 
                 <h4 class="font-display text-2xl mb-3 text-white leading-[2]">
-                    <span class="font-mono">Remote Controller</span> 手機遠端控制台
+                    <span class="font-mono">Remote Controller</span> <span class="lang-zh">手機遠端控制台</span><span class="lang-en">Mobile Remote Control Console</span>
                 </h4>
-                <p class="text-gray-400 mb-6 leading-[2]">結合 WebSocket 即時通訊與系統自動化腳本，打造專屬的跨裝置遠端遙控中心。</p>
+                <p class="text-gray-400 mb-6 leading-[2]"><span class="lang-zh">結合 WebSocket 即時通訊與系統自動化腳本，打造專屬的跨裝置遠端遙控中心。</span><span class="lang-en">A cross-device remote control hub built with real-time WebSocket communication and system automation scripts.</span></p>
 
                 <div class="flex gap-3 flex-wrap">
                     <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Flask</span>
@@ -299,7 +333,7 @@
                 <h4 class="font-display text-2xl mb-3 text-white leading-[2]">
                     <span class="font-mono">Smart Text-to-SQL Agent</span>
                 </h4>
-                <p class="text-gray-400 mb-6 leading-[2]">具備自我修正機制 (Self-Correction) 與資料遮蔽 (Data Masking) 功能的 Text-to-SQL 實作。</p>
+                <p class="text-gray-400 mb-6 leading-[2]"><span class="lang-zh">具備自我修正機制 (Self-Correction) 與資料遮蔽 (Data Masking) 功能的 Text-to-SQL 實作。</span><span class="lang-en">A Text-to-SQL implementation featuring self-correction and data masking.</span></p>
 
                 <div class="flex gap-3 flex-wrap">
                     <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Gemini
@@ -331,7 +365,7 @@
                 <h4 class="font-display text-2xl mb-3 text-white leading-[2]">
                     <span class="font-mono">Multi-Agent Snake DQN</span>：Hunter vs. Gatherer
                 </h4>
-                <p class="text-gray-400 mb-6 leading-[2]">基於 Pygame 與 PyTorch 打造的多智能體強化學習 (MARL) 實驗環境，探討非對稱目標下的 AI 策略演化。</p>
+                <p class="text-gray-400 mb-6 leading-[2]"><span class="lang-zh">基於 Pygame 與 PyTorch 打造的多智能體強化學習 (MARL) 實驗環境，探討非對稱目標下的 AI 策略演化。</span><span class="lang-en">A multi-agent reinforcement learning (MARL) sandbox built with Pygame and PyTorch, exploring AI strategy evolution under asymmetric objectives.</span></p>
 
                 <div class="flex gap-3 flex-wrap">
                     <span
@@ -363,7 +397,7 @@
                 <h4 class="font-display text-2xl mb-3 text-white leading-[2]">
                     <span class="font-mono">Hand Dinosaur</span> 🦖
                 </h4>
-                <p class="text-gray-400 mb-6 leading-[2]">用手勢取代鍵盤！基於 MediaPipe 與 Pygame 開發的即時體感小恐龍遊戲。</p>
+                <p class="text-gray-400 mb-6 leading-[2]"><span class="lang-zh">用手勢取代鍵盤！基於 MediaPipe 與 Pygame 開發的即時體感小恐龍遊戲。</span><span class="lang-en">Ditch the keyboard for hand gestures! A real-time motion-controlled dino game built with MediaPipe and Pygame.</span></p>
 
                 <div class="flex gap-3 flex-wrap">
                     <span
@@ -381,8 +415,8 @@
 
     <section id="contact" class="py-32 px-6 text-center">
         <div class="glass-card max-w-4xl mx-auto rounded-[3rem] py-20 px-10" data-aos="flip-up">
-            <h3 class="font-display text-4xl md:text-5xl mb-6">準備好開始合作了嗎？</h3>
-            <p class="text-gray-400 text-lg mb-12">無論是技術交流或專案開發，歡迎透過以下方式聯絡我！</p>
+            <h3 class="font-display text-4xl md:text-5xl mb-6"><span class="lang-zh">準備好開始合作了嗎？</span><span class="lang-en">Ready to Start a Conversation?</span></h3>
+            <p class="text-gray-400 text-lg mb-12"><span class="lang-zh">無論是技術交流或專案開發，歡迎透過以下方式聯絡我！</span><span class="lang-en">Whether it's a technical discussion or a project collaboration, feel free to reach out through any of the channels below!</span></p>
 
             <div class="flex flex-col items-center gap-8">
 
@@ -434,6 +468,16 @@
             const nav = document.getElementById('mobile-nav');
             nav.classList.toggle('hidden');
             nav.classList.toggle('flex');
+        }
+
+        function applyLang(lang) {
+            document.documentElement.classList.toggle('lang-en', lang === 'en');
+            localStorage.setItem('site-lang', lang);
+        }
+
+        function toggleLang() {
+            const isEn = document.documentElement.classList.contains('lang-en');
+            applyLang(isEn ? 'zh' : 'en');
         }
 
         // 讓指定區塊捲動到畫面正中間，而不是貼齊導覽列下方
@@ -512,30 +556,44 @@
 <!--Remote Controller-->
     <div class="mb-10 space-y-4">
         <p class="text-gray-300 text-lg leading-[2]">
-            結合 <span class="text-white font-bold font-mono">WebSocket</span> 即時通訊與系統自動化腳本，打造專屬的
-            <span class="text-white font-bold">跨裝置遠端遙控中心</span>。
+            <span class="lang-zh">結合 <span class="text-white font-bold font-mono">WebSocket</span> 即時通訊與系統自動化腳本，打造專屬的
+            <span class="text-white font-bold">跨裝置遠端遙控中心</span>。</span><span class="lang-en">A cross-device remote control hub built by combining real-time <span class="text-white font-bold font-mono">WebSocket</span> communication with <span class="text-white font-bold">system automation scripts</span>.</span>
         </p>
 
         <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
             <p class="text-white font-bold flex items-center gap-2 mb-2">
-                <span>🌟</span> 核心亮點與實作細節：
+                <span>🌟</span> <span class="lang-zh">核心亮點與實作細節：</span><span class="lang-en">Core Highlights & Implementation Details:</span>
             </p>
             <ul class="text-base text-gray-400 leading-[2] space-y-3">
-                <li>
+                <li class="lang-zh">
                     <strong class="text-gray-200">跨端效能調優（Performance Tuning）：</strong>
                     利用 Flask-SocketIO 建立雙向連線，將手機螢幕轉化為電腦觸控板。開發過程中發現高頻率觸控事件會導致作業系統游標卡頓，經排查後實施雙向優化：前端導入
                     <code class="bg-black/50 px-1 rounded text-gray-300">requestAnimationFrame</code>
                     進行事件節流，後端關閉 pyautogui 的預設強制延遲 (PAUSE=0)，最終達成絲滑的操控體驗。
                 </li>
-                <li>
+                <li class="lang-en">
+                    <strong class="text-gray-200">Cross-Device Performance Tuning:</strong>
+                    Built a bidirectional connection with Flask-SocketIO to turn a phone screen into a computer trackpad. High-frequency touch events were found to cause OS cursor lag, fixed with a two-sided optimization: the frontend throttles events with
+                    <code class="bg-black/50 px-1 rounded text-gray-300">requestAnimationFrame</code>,
+                    while the backend disables pyautogui's default forced delay (PAUSE=0), achieving a silky-smooth control experience.
+                </li>
+                <li class="lang-zh">
                     <strong class="text-gray-200">遠端系統自動化（System Automation Dashboard）：</strong>
                     建置基於 HTTP 的多元控制面板，整合 PyAutoGUI 實作 OS 層級的按鍵與視窗控制。功能涵蓋遠端批次關閉應用程式視窗
                     (Alt+F4)、一鍵開啟特定網頁，以及透過模擬鍵盤操作自動開啟 ChatGPT 網頁並貼上提問內容。
                 </li>
-                <li>
+                <li class="lang-en">
+                    <strong class="text-gray-200">Remote System Automation Dashboard:</strong>
+                    Built a multi-function HTTP-based control panel integrating PyAutoGUI for OS-level key and window control. Features include remotely batch-closing application windows (Alt+F4), one-click opening of specific web pages, and simulating keystrokes to auto-open ChatGPT and paste in a query.
+                </li>
+                <li class="lang-zh">
                     <strong class="text-gray-200">LINE Bot 第三方串接（Instant Notification）：</strong>
                     串接 LINE Message API，並嚴格落實環境變數 (.env) 資安控管。當伺服器啟動時，系統會主動推播控制台專屬網址至手機；同時結合
                     Web Scraping 技術，支援一鍵爬取即時新聞並透過 LINE 傳送，打造完整的跨平台互動。
+                </li>
+                <li class="lang-en">
+                    <strong class="text-gray-200">LINE Bot Third-Party Integration (Instant Notification):</strong>
+                    Integrated the LINE Message API with strict environment-variable (.env) security controls. On server startup, the system proactively pushes the console's dedicated URL to the phone; it also supports one-click scraping of live news that's delivered over LINE, rounding out a complete cross-platform interaction.
                 </li>
             </ul>
         </div>
@@ -546,20 +604,20 @@
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
                 <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">USER</span>
-                <p class="text-sm font-bold text-white mb-1">手機 Web 介面</p>
-                <p class="text-[10px] text-gray-400">觸控 / 按鈕指令</p>
+                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">手機 Web 介面</span><span class="lang-en">Mobile Web UI</span></p>
+                <p class="text-[10px] text-gray-400"><span class="lang-zh">觸控 / 按鈕指令</span><span class="lang-en">Touch / Button Commands</span></p>
             </div>
             <div class="text-gray-500">→</div>
             <div class="flex-1 text-center p-4 rounded-xl bg-white/10 border border-white/20 relative">
                 <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">FLASK</span>
-                <p class="text-sm font-bold text-white mb-1">WebSocket / HTTP 路由</p>
-                <p class="text-[10px] text-gray-300">Flask-SocketIO 雙向連線</p>
+                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">WebSocket / HTTP 路由</span><span class="lang-en">WebSocket / HTTP Routing</span></p>
+                <p class="text-[10px] text-gray-300"><span class="lang-zh">Flask-SocketIO 雙向連線</span><span class="lang-en">Flask-SocketIO Bidirectional Link</span></p>
             </div>
             <div class="text-gray-500">→</div>
             <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
                 <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">OS</span>
-                <p class="text-sm font-bold text-white mb-1">系統層執行</p>
-                <p class="text-[10px] text-gray-400">滑鼠／視窗／瀏覽器</p>
+                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">系統層執行</span><span class="lang-en">OS-Level Execution</span></p>
+                <p class="text-[10px] text-gray-400"><span class="lang-zh">滑鼠／視窗／瀏覽器</span><span class="lang-en">Mouse / Window / Browser</span></p>
             </div>
         </div>
     </div>
@@ -579,36 +637,52 @@
 
                     <div class="mb-10 space-y-4">
                         <p class="text-gray-300 text-lg leading-[2]">
-                            這是一個具備 <span class="text-white font-bold">自我修正機制 (Self-Correction)</span> 與
+                            <span class="lang-zh">這是一個具備 <span class="text-white font-bold">自我修正機制 (Self-Correction)</span> 與
                             <span class="text-white font-bold">資料遮蔽 (Data Masking)</span> 功能的 Text-to-SQL
-                            實作。使用者無需撰寫複雜代碼，只需透過日常自然語言即可直觀地進行數據的檢索、分析與編輯。
+                            實作。使用者無需撰寫複雜代碼，只需透過日常自然語言即可直觀地進行數據的檢索、分析與編輯。</span><span class="lang-en">A Text-to-SQL implementation featuring <span class="text-white font-bold">self-correction</span> and <span class="text-white font-bold">data masking</span>. Users can intuitively retrieve, analyze, and edit data using everyday natural language, with no need to write complex code.</span>
                         </p>
 
                         <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
                             <p class="text-white font-bold flex items-center gap-2 mb-2">
-                                <span>🛠️</span> 專案重點與實作細節：
+                                <span>🛠️</span> <span class="lang-zh">專案重點與實作細節：</span><span class="lang-en">Project Highlights & Implementation Details:</span>
                             </p>
                             <ul class="text-base text-gray-400 leading-[2] space-y-3">
-                                <li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">自動除錯與重試機制（Self-Correction Loop）：</strong>
                                     為了解決 LLM 生成 SQL 經常發生幻覺或欄位對不上的問題，實作了自動重試的邏輯。當生成的 SQL 執行報錯時，程式會攔截 Error
                                     Message 並結合當前的 Schema 結構，將錯誤資訊回傳給 LLM 重新修正，直到語法能順利執行為止。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Self-Correction Loop:</strong>
+                                    To fix LLM-generated SQL frequently hallucinating or mismatching column names, an automatic retry loop was implemented. When generated SQL throws an execution error, the program intercepts the error message, combines it with the current schema, and feeds it back to the LLM to correct until the query executes cleanly.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">敏感資料遮蔽中介層（Data Vault Middleware）：</strong>
                                     為了避免將使用者的真實 PII（如姓名、Email 等）明文傳送給外部 LLM API，實作了中介層機制。在發送 Prompt 前先將敏感字串抽換為
                                     Token（如 <code class="bg-black/50 px-1 rounded text-gray-300">[SECRET_VALUE_0]</code>）；待
                                     SQL 生成後，再於本地端還原為真實資料寫入資料庫，降低資料外洩風險。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Data Vault Middleware:</strong>
+                                    To avoid sending users' real PII (names, emails, etc.) in plaintext to an external LLM API, a middleware layer swaps sensitive strings for tokens (e.g. <code class="bg-black/50 px-1 rounded text-gray-300">[SECRET_VALUE_0]</code>) before the prompt is sent; after SQL is generated, the tokens are restored to real data locally before writing to the database, reducing the risk of data leakage.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">讀寫分離的執行邏輯（Hybrid Executor）：</strong>
                                     程式會自動解析 SQL 類型並對應不同操作：若是 SELECT 查詢，會將結果打包成 Pandas DataFrame
                                     方便後續處理；若是 INSERT/UPDATE 等寫入操作，則自動執行 Transaction Commit 確保資料正確寫入。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Hybrid Executor (Read/Write Separation):</strong>
+                                    The program automatically parses the SQL type and dispatches accordingly: SELECT queries are packaged into a Pandas DataFrame for downstream processing, while INSERT/UPDATE writes automatically trigger a transaction commit to ensure data is written correctly.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">Prompt 結構化設計：</strong>
                                     在 Prompt 中套用 Few-Shot Learning 與 Chain-of-Thought (CoT) 技巧，提供範例幫助 LLM
                                     更好地理解關聯式資料庫結構，從而產出包含 JOIN 等較複雜的查詢語句。
+                                </li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Structured Prompt Design:</strong>
+                                    Few-Shot Learning and Chain-of-Thought (CoT) techniques are applied within the prompt, providing examples that help the LLM better understand the relational schema and produce more complex queries, including JOINs.
                                 </li>
                             </ul>
                         </div>
@@ -622,8 +696,8 @@
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">STEP
                                     01</span>
-                                <p class="text-sm font-bold text-white mb-1">自然語言輸入</p>
-                                <p class="text-[10px] text-gray-400">"查 Jason 的 Email"</p>
+                                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">自然語言輸入</span><span class="lang-en">Natural Language Input</span></p>
+                                <p class="text-[10px] text-gray-400">"<span class="lang-zh">查 Jason 的 Email</span><span class="lang-en">Find Jason's email</span>"</p>
                             </div>
                             <div class="text-gray-500">→</div>
                             <div
@@ -631,15 +705,15 @@
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">AI
                                     ENGINE</span>
-                                <p class="text-sm font-bold text-white mb-1">遮蔽敏感資料 + 生成 SQL</p>
+                                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">遮蔽敏感資料 + 生成 SQL</span><span class="lang-en">Mask Sensitive Data + Generate SQL</span></p>
                                 <p class="text-[10px] text-gray-300">Few-Shot / CoT Prompting</p>
                             </div>
                             <div class="text-gray-500">→</div>
                             <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">EXECUTION</span>
-                                <p class="text-sm font-bold text-white mb-1">讀寫分離執行 + 自動重試</p>
-                                <p class="text-[10px] text-gray-400">報錯即回傳 LLM 重新修正</p>
+                                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">讀寫分離執行 + 自動重試</span><span class="lang-en">Read/Write Execution + Auto-Retry</span></p>
+                                <p class="text-[10px] text-gray-400"><span class="lang-zh">報錯即回傳 LLM 重新修正</span><span class="lang-en">Errors are fed back to the LLM to fix</span></p>
                             </div>
                         </div>
                     </div>
@@ -660,38 +734,56 @@
 
                     <div class="mb-10 space-y-4">
                         <p class="text-gray-300 text-lg leading-[2]">
-                            基於 <span class="text-white font-bold font-mono">Pygame</span> 與
+                            <span class="lang-zh">基於 <span class="text-white font-bold font-mono">Pygame</span> 與
                             <span class="text-white font-bold font-mono">PyTorch</span> 打造的
-                            <span class="text-white font-bold">多智能體強化學習 (MARL)</span> 實驗環境，探討非對稱目標下的 AI 策略演化。
+                            <span class="text-white font-bold">多智能體強化學習 (MARL)</span> 實驗環境，探討非對稱目標下的 AI 策略演化。</span><span class="lang-en">A multi-agent reinforcement learning (MARL) sandbox built with <span class="text-white font-bold font-mono">Pygame</span> and <span class="text-white font-bold font-mono">PyTorch</span>, exploring AI strategy evolution under asymmetric objectives.</span>
                         </p>
 
                         <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
                             <p class="text-white font-bold flex items-center gap-2 mb-2">
-                                <span>🌟</span> 核心亮點與技術實現：
+                                <span>🌟</span> <span class="lang-zh">核心亮點與技術實現：</span><span class="lang-en">Core Highlights & Technical Implementation:</span>
                             </p>
                             <ul class="text-base text-gray-400 leading-[2] space-y-3">
-                                <li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">多智能體非對稱對抗（Asymmetric MARL）：</strong>
                                     設計兩種截然不同的 AI 角色——採集者（Gatherer／藍蛇）目標是盡可能吃掉紅色食物以增加長度；獵人（Hunter／綠蛇）對食物免疫且無感，唯一目標是攔截、封鎖或擊殺採集者，藉由逼迫對手撞上自己的身體來獲取分數與成長。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Asymmetric Multi-Agent Adversarial Setup:</strong>
+                                    Two fundamentally different AI roles were designed — the Gatherer (blue snake), whose goal is to eat as much red food as possible to grow longer, and the Hunter (green snake), which is immune and indifferent to food and whose sole objective is to intercept, block, or kill the Gatherer by forcing it to collide with its own body to earn score and length.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">深度 Q 網路架構（DQN Architecture）：</strong>
                                     系統中包含兩個完全獨立的 AI 模型，各自擁有網路結構 3-layer MLP（15 → 256 → 128 →
                                     3），以及穩定機制：容量達 20,000 筆的 Experience Replay Buffer，Target Network 每 1,000
                                     步同步一次，搭配 Adam Optimizer（梯度裁剪截斷）確保模型收斂。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Deep Q-Network Architecture:</strong>
+                                    The system contains two fully independent AI models, each with a 3-layer MLP (15 → 256 → 128 → 3), plus stabilization mechanisms: a 20,000-entry Experience Replay Buffer, a Target Network synced every 1,000 steps, and an Adam Optimizer with gradient clipping to ensure convergence.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">狀態空間與獎勵工程（State Space & Reward
                                         Shaping）：</strong>
                                     賦予 AI 15 個特徵維度的感知能力，包含前方／左右障礙物判斷、自身方向、目標相對方位，以及對手的移動方向。透過精心調校的 Reward
                                     Function（例如獵人成功肉身封鎖對手給予 +200 激勵），有效解決稀疏獎勵問題。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">State Space & Reward Shaping:</strong>
+                                    Gives the AI 15 perception feature dimensions, including forward/left/right obstacle detection, its own direction, the target's relative position, and the opponent's movement direction. A carefully tuned reward function (e.g. +200 for the Hunter successfully blocking the opponent) effectively resolves the sparse-reward problem.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">容器化無頭訓練環境（Dockerized Headless
                                         Training）：</strong>
                                     除了支援本機 Pygame 視覺化即時渲染外，也撰寫了 Dockerfile 與 docker-compose.yml，透過
                                     <code class="bg-black/50 px-1 rounded text-gray-300">SDL_VIDEODRIVER=dummy</code>
                                     實作無頭模式（Headless），方便在背景或雲端伺服器進行長時間的自動化對局訓練。
+                                </li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Dockerized Headless Training:</strong>
+                                    Besides local real-time Pygame rendering, a Dockerfile and docker-compose.yml were written to implement headless mode via
+                                    <code class="bg-black/50 px-1 rounded text-gray-300">SDL_VIDEODRIVER=dummy</code>,
+                                    making long-running automated training convenient on background or cloud servers.
                                 </li>
                             </ul>
                         </div>
@@ -699,26 +791,26 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                         <div class="bg-white/5 border border-white/10 p-5 rounded-2xl relative overflow-hidden">
-                            <h3 class="text-white font-bold mb-2">GATHERER：採集者（藍蛇）</h3>
+                            <h3 class="text-white font-bold mb-2">GATHERER：<span class="lang-zh">採集者（藍蛇）</span><span class="lang-en">Gatherer (Blue Snake)</span></h3>
                             <ul class="text-xs text-gray-400 space-y-2">
-                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> 目標：盡可能吃掉紅色食物以增加長度
+                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> <span class="lang-zh">目標：盡可能吃掉紅色食物以增加長度</span><span class="lang-en">Goal: eat as much red food as possible to grow longer</span>
                                 </li>
                                 <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
-                                    弱點：一般死亡扣分，被獵人逼迫撞上其身體時懲罰更重</li>
-                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> 感知：食物相對自己的方位。
+                                    <span class="lang-zh">弱點：一般死亡扣分，被獵人逼迫撞上其身體時懲罰更重</span><span class="lang-en">Weakness: loses points on death, with a heavier penalty when forced by the Hunter into colliding with its body</span></li>
+                                <li class="flex items-start gap-2"><span class="text-gray-500">●</span> <span class="lang-zh">感知：食物相對自己的方位。</span><span class="lang-en">Perception: the food's position relative to itself.</span>
                                 </li>
                             </ul>
                         </div>
 
                         <div class="bg-white/10 border border-white/20 p-5 rounded-2xl relative overflow-hidden">
-                            <h3 class="text-white font-bold mb-2">HUNTER：獵人（綠蛇）</h3>
+                            <h3 class="text-white font-bold mb-2">HUNTER：<span class="lang-zh">獵人（綠蛇）</span><span class="lang-en">Hunter (Green Snake)</span></h3>
                             <ul class="text-xs text-gray-400 space-y-2">
                                 <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
-                                    目標：攔截、封鎖或擊殺採集者，逼迫對手撞上自己身體 (+200分)</li>
+                                    <span class="lang-zh">目標：攔截、封鎖或擊殺採集者，逼迫對手撞上自己身體 (+200分)</span><span class="lang-en">Goal: intercept, block, or kill the Gatherer by forcing it into its own body (+200 points)</span></li>
                                 <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
-                                    特性：對食物免疫且無感，只有成功阻擋才會成長。</li>
+                                    <span class="lang-zh">特性：對食物免疫且無感，只有成功阻擋才會成長。</span><span class="lang-en">Trait: immune and indifferent to food — only grows by successfully blocking the opponent.</span></li>
                                 <li class="flex items-start gap-2"><span class="text-gray-500">●</span>
-                                    感知：多了對手目前的移動方向，比採集者多一份資訊優勢。</li>
+                                    <span class="lang-zh">感知：多了對手目前的移動方向，比採集者多一份資訊優勢。</span><span class="lang-en">Perception: also senses the opponent's current movement direction, an informational edge over the Gatherer.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -766,44 +858,56 @@
 
                     <div class="mb-10 space-y-4">
                         <p class="text-gray-300 text-lg leading-[2]">
-                            用手勢取代鍵盤！這是一款基於 <span class="text-white font-bold font-mono">MediaPipe</span> 與
-                            <span class="text-white font-bold font-mono">Pygame</span> 開發的即時體感小恐龍遊戲。
+                            <span class="lang-zh">用手勢取代鍵盤！這是一款基於 <span class="text-white font-bold font-mono">MediaPipe</span> 與
+                            <span class="text-white font-bold font-mono">Pygame</span> 開發的即時體感小恐龍遊戲。</span><span class="lang-en">Ditch the keyboard for hand gestures! A real-time motion-controlled dino game built with <span class="text-white font-bold font-mono">MediaPipe</span> and <span class="text-white font-bold font-mono">Pygame</span>.</span>
                         </p>
 
                         <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
-                            <p class="text-white font-bold flex items-center gap-2 mb-2"><span>👁️</span> 電腦視覺與手部追蹤
-                                (Computer Vision)：</p>
+                            <p class="text-white font-bold flex items-center gap-2 mb-2"><span>👁️</span> <span class="lang-zh">電腦視覺與手部追蹤
+                                (Computer Vision)：</span><span class="lang-en">Computer Vision & Hand Tracking:</span></p>
                             <p class="text-base text-gray-400 leading-[2]">
-                                整合 OpenCV 處理即時視訊串流，並介接 Google MediaPipe Hands 模型，以低延遲準確捕捉手部的 21 個關鍵點。
+                                <span class="lang-zh">整合 OpenCV 處理即時視訊串流，並介接 Google MediaPipe Hands 模型，以低延遲準確捕捉手部的 21 個關鍵點。</span><span class="lang-en">Integrates OpenCV for real-time video stream processing and interfaces with Google's MediaPipe Hands model to accurately capture 21 hand landmarks with low latency.</span>
                             </p>
                         </div>
 
                         <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
-                            <p class="text-white font-bold flex items-center gap-2 mb-2"><span>📐</span> 基於向量運算的手勢分類器
-                                (Gesture Recognition Logic)：</p>
+                            <p class="text-white font-bold flex items-center gap-2 mb-2"><span>📐</span> <span class="lang-zh">基於向量運算的手勢分類器
+                                (Gesture Recognition Logic)：</span><span class="lang-en">Vector-Based Gesture Classifier (Gesture Recognition Logic):</span></p>
                             <p class="text-base text-gray-400 leading-[2]">
-                                有別於傳統的機器學習圖像分類，實作了幾何角度演算法：計算 5 根手指關節的彎曲角度，設定 50° 為伸直與捲縮的閾值，精準判斷「張開手掌（跳躍）」、「特定三指伸直（蹲下）」與「握拳（忽略）」等動作。
+                                <span class="lang-zh">有別於傳統的機器學習圖像分類，實作了幾何角度演算法：計算 5 根手指關節的彎曲角度，設定 50° 為伸直與捲縮的閾值，精準判斷「張開手掌（跳躍）」、「特定三指伸直（蹲下）」與「握拳（忽略）」等動作。
                                 <br>公式：<code class="bg-black/50 px-1 rounded text-gray-300">Angle = acos( (v1⋅v2) /
-                                    (|v1|*|v2|) )</code>
+                                    (|v1|*|v2|) )</code></span><span class="lang-en">Instead of traditional ML-based image classification, a geometric angle algorithm was implemented: it computes the bend angle of each of the 5 finger joints and uses 50° as the threshold between extended and curled, precisely distinguishing "open palm (jump)", "three specific fingers extended (duck)", and "closed fist (ignore)".
+                                <br>Formula: <code class="bg-black/50 px-1 rounded text-gray-300">Angle = acos( (v1⋅v2) /
+                                    (|v1|*|v2|) )</code></span>
                             </p>
                         </div>
 
                         <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
-                            <p class="text-white font-bold flex items-center gap-2 mb-2"><span>🔗</span> 非同步輸入與遊戲引擎整合
-                                (System Integration)：</p>
+                            <p class="text-white font-bold flex items-center gap-2 mb-2"><span>🔗</span> <span class="lang-zh">非同步輸入與遊戲引擎整合
+                                (System Integration)：</span><span class="lang-en">Asynchronous Input & Game Engine Integration (System Integration):</span></p>
                             <p class="text-base text-gray-400 leading-[2]">
-                                實作了兩種整合架構以應對不同的軟體設計模式：
+                                <span class="lang-zh">實作了兩種整合架構以應對不同的軟體設計模式：</span><span class="lang-en">Two integration architectures were implemented to handle different software design patterns:</span>
                             </p>
                             <ul class="text-base text-gray-400 leading-[2] space-y-2 mt-2">
-                                <li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">事件模擬驅動：</strong>
                                     透過 <code class="bg-black/50 px-1 rounded text-gray-300">keyboard</code>
                                     套件觸發 OS 層級的全域按鍵事件，讓手勢可以直接控制任何支援鍵盤的應用程式。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Simulated Event-Driven Input:</strong>
+                                    Uses the <code class="bg-black/50 px-1 rounded text-gray-300">keyboard</code>
+                                    package to trigger OS-level global key events, letting gestures directly control any application that accepts keyboard input.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">狀態直接注入：</strong>
                                     繞過作業系統的按鍵佇列，將辨識結果直接傳入 Pygame 角色更新邏輯
                                     <code class="bg-black/50 px-1 rounded text-gray-300">Dinosaur.update()</code>，提升遊戲反應速度與穩定性。
+                                </li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Direct State Injection:</strong>
+                                    Bypasses the OS keystroke queue and feeds recognition results directly into the Pygame character update logic
+                                    <code class="bg-black/50 px-1 rounded text-gray-300">Dinosaur.update()</code>, improving game responsiveness and stability.
                                 </li>
                             </ul>
                         </div>
@@ -812,23 +916,23 @@
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
                         <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-center">
                             <div class="text-4xl mb-2">🖐️</div>
-                            <h3 class="font-bold text-white mb-1">張開手掌</h3>
-                            <p class="text-xs text-gray-400">五指角度皆 &lt; 50°（全部伸直）</p>
-                            <div class="mt-3 bg-white text-black py-1 rounded font-bold text-sm">ACTION: JUMP (跳躍)</div>
+                            <h3 class="font-bold text-white mb-1"><span class="lang-zh">張開手掌</span><span class="lang-en">Open Palm</span></h3>
+                            <p class="text-xs text-gray-400"><span class="lang-zh">五指角度皆 &lt; 50°（全部伸直）</span><span class="lang-en">All 5 finger angles &lt; 50° (fully extended)</span></p>
+                            <div class="mt-3 bg-white text-black py-1 rounded font-bold text-sm">ACTION: JUMP (<span class="lang-zh">跳躍</span><span class="lang-en">Jump</span>)</div>
                         </div>
                         <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-center">
                             <div class="text-4xl mb-2 font-mono">3</div>
-                            <h3 class="font-bold text-white mb-1">特定三指伸直</h3>
-                            <p class="text-xs text-gray-400">拇指、小指彎曲（≥ 50°），其餘伸直</p>
+                            <h3 class="font-bold text-white mb-1"><span class="lang-zh">特定三指伸直</span><span class="lang-en">Three Fingers Extended</span></h3>
+                            <p class="text-xs text-gray-400"><span class="lang-zh">拇指、小指彎曲（≥ 50°），其餘伸直</span><span class="lang-en">Thumb and pinky curled (≥ 50°), other three extended</span></p>
                             <div class="mt-3 bg-white/10 text-white py-1 rounded font-bold text-sm border border-white/20">
-                                ACTION: DUCK (蹲下)</div>
+                                ACTION: DUCK (<span class="lang-zh">蹲下</span><span class="lang-en">Duck</span>)</div>
                         </div>
                         <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-center">
                             <div class="text-4xl mb-2">✊</div>
-                            <h3 class="font-bold text-white mb-1">握拳</h3>
-                            <p class="text-xs text-gray-400">五指角度皆 ≥ 50°（全部彎曲）</p>
+                            <h3 class="font-bold text-white mb-1"><span class="lang-zh">握拳</span><span class="lang-en">Closed Fist</span></h3>
+                            <p class="text-xs text-gray-400"><span class="lang-zh">五指角度皆 ≥ 50°（全部彎曲）</span><span class="lang-en">All 5 finger angles ≥ 50° (fully curled)</span></p>
                             <div class="mt-3 bg-white/5 text-gray-400 py-1 rounded font-bold text-sm border border-white/10">
-                                ACTION: IGNORE (忽略)</div>
+                                ACTION: IGNORE (<span class="lang-zh">忽略</span><span class="lang-en">Ignore</span>)</div>
                         </div>
                     </div>
 
@@ -849,7 +953,7 @@
                             </div>
                             <div class="text-gray-600">→</div>
                             <div class="flex-1 text-center p-3 rounded-lg bg-white/5 border border-white/10 text-gray-300">
-                                keyboard 事件 /<br>Pygame 直接注入
+                                <span class="lang-zh">keyboard 事件 /<br>Pygame 直接注入</span><span class="lang-en">keyboard events /<br>Direct Pygame Injection</span>
                             </div>
                         </div>
                     </div>
@@ -870,36 +974,52 @@
 
                     <div class="mb-10 space-y-4">
                         <p class="text-gray-300 text-lg leading-[2]">
-                            <span class="text-white font-bold font-mono">OfferDash</span> 是一套
-                            <span class="text-white font-bold">AI 驅動的一站式求職教練平台</span>，從履歷健檢、模擬面試到面試復盤，全面追蹤使用者的求職進度。
+                            <span class="lang-zh"><span class="text-white font-bold font-mono">OfferDash</span> 是一套
+                            <span class="text-white font-bold">AI 驅動的一站式求職教練平台</span>，從履歷健檢、模擬面試到面試復盤，全面追蹤使用者的求職進度。</span><span class="lang-en"><span class="text-white font-bold font-mono">OfferDash</span> is an <span class="text-white font-bold">AI-driven, all-in-one job-hunting coach platform</span> that tracks a user's job search end to end — from resume health checks and mock interviews to post-interview reviews.</span>
                         </p>
 
                         <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
                             <p class="text-white font-bold flex items-center gap-2 mb-2">
-                                <span>🌟</span> 核心亮點與技術實現：
+                                <span>🌟</span> <span class="lang-zh">核心亮點與技術實現：</span><span class="lang-en">Core Highlights & Technical Implementation:</span>
                             </p>
                             <ul class="text-base text-gray-400 leading-[2] space-y-3">
-                                <li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">沉浸式 AI 模擬面試（Voice-Interactive AI
                                         Interview）：</strong>
                                     摒棄純文字對話，整合 OpenAI TTS（onyx 音色）與瀏覽器原生 Web Speech API（並以 Whisper 作為備援），打造全語音的擬真面試戰場，可根據上傳的
                                     PDF 履歷與 JD 動態生成客製化追問。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Immersive Voice-Interactive AI Interview:</strong>
+                                    Ditching plain text chat, this integrates OpenAI TTS (onyx voice) with the browser's native Web Speech API (backed by Whisper as fallback) to build a fully voice-driven, realistic interview arena that dynamically generates customized follow-up questions based on the uploaded PDF resume and job description.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">履歷 × JD 雙向診斷系統（ATS Match &
                                         Diagnosis）：</strong>
                                     運用 GPT-4o 分析履歷與職缺描述，產出 ATS 契合度分數，並嚴格要求 LLM 基於原文總結以避免幻覺，精準預測面試官意圖與必考題。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Resume × JD Bidirectional Diagnosis System (ATS Match & Diagnosis):</strong>
+                                    Uses GPT-4o to analyze the resume against the job description, producing an ATS match score. The LLM is strictly constrained to summarize based on the source text to avoid hallucination, accurately predicting interviewer intent and likely questions.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">遊戲化復盤與成長機制（Gamified Feedback
                                         System）：</strong>
                                     面試後自動生成復盤報告，抓出「最弱的 3 個回答」轉化為「翻盤任務」，依據產業別給予重答策略，引導使用者針對弱點刻意練習。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Gamified Feedback & Growth System:</strong>
+                                    Automatically generates a post-interview review report, identifying the "3 weakest answers" and turning them into "comeback missions" with industry-specific re-answer strategies, guiding users toward deliberate practice on their weak points.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">非同步面試管家（Asynchronous Interview
                                         Calendar）：</strong>
                                     內建行事曆系統，面試前 2 小時自動寄送含 AI 激勵語錄的提醒信。為避免寄信當下呼叫 LLM 造成超時失敗，信件內容在建立行程當下即非同步預先生成並存入
                                     Supabase，確保 APScheduler 背景排程能穩定準時觸發寄送。
+                                </li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Asynchronous Interview Calendar:</strong>
+                                    A built-in calendar system automatically sends a reminder email with an AI-generated motivational quote 2 hours before an interview. To avoid a timeout from calling the LLM at send time, email content is pre-generated asynchronously when the event is created and stored in Supabase, ensuring APScheduler's background job fires reliably and on time.
                                 </li>
                             </ul>
                         </div>
@@ -912,8 +1032,8 @@
                             <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">INPUT</span>
-                                <p class="text-sm font-bold text-white mb-1">履歷 PDF + JD</p>
-                                <p class="text-[10px] text-gray-400">使用者上傳資料</p>
+                                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">履歷 PDF + JD</span><span class="lang-en">Resume PDF + JD</span></p>
+                                <p class="text-[10px] text-gray-400"><span class="lang-zh">使用者上傳資料</span><span class="lang-en">User-uploaded data</span></p>
                             </div>
                             <div class="text-gray-500">→</div>
                             <div
@@ -921,15 +1041,15 @@
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">AI
                                     ENGINE</span>
-                                <p class="text-sm font-bold text-white mb-1">GPT-4o 診斷 + 語音面試</p>
-                                <p class="text-[10px] text-gray-300">TTS / Whisper 即時互動</p>
+                                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">GPT-4o 診斷 + 語音面試</span><span class="lang-en">GPT-4o Diagnosis + Voice Interview</span></p>
+                                <p class="text-[10px] text-gray-300"><span class="lang-zh">TTS / Whisper 即時互動</span><span class="lang-en">TTS / Whisper Real-Time Interaction</span></p>
                             </div>
                             <div class="text-gray-500">→</div>
                             <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">OUTPUT</span>
-                                <p class="text-sm font-bold text-white mb-1">復盤報告 + 提醒信</p>
-                                <p class="text-[10px] text-gray-400">APScheduler 非同步排程</p>
+                                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">復盤報告 + 提醒信</span><span class="lang-en">Review Report + Reminder Email</span></p>
+                                <p class="text-[10px] text-gray-400"><span class="lang-zh">APScheduler 非同步排程</span><span class="lang-en">APScheduler Async Scheduling</span></p>
                             </div>
                         </div>
                     </div>

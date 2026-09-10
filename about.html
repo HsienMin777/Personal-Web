@@ -38,6 +38,24 @@
             font-family: 'Playfair Display', serif;
         }
 
+        /* 中英文切換：預設顯示中文，html 加上 .lang-en 後切換成英文 */
+        .lang-en {
+            display: none;
+        }
+
+        html.lang-en .lang-en {
+            display: inline;
+        }
+
+        html.lang-en .lang-zh {
+            display: none;
+        }
+
+        .lang-toggle-btn {
+            font-family: 'Space Grotesk', monospace;
+            letter-spacing: 0.05em;
+        }
+
         /* 環境光暈：純白單色漫射光，僅暗示空間深度 */
         .blob {
             position: absolute;
@@ -144,6 +162,12 @@
             background: rgba(255, 255, 255, 0.4);
         }
     </style>
+    <script>
+        // 提早套用語言偏好，避免切換到英文時畫面先閃一下中文
+        if (localStorage.getItem('site-lang') === 'en') {
+            document.documentElement.classList.add('lang-en');
+        }
+    </script>
 </head>
 
 <body class="selection:bg-white/20 selection:text-white">
@@ -160,13 +184,23 @@
         <div class="max-w-6xl mx-auto glass-card rounded-2xl">
             <div class="flex justify-between items-center px-6 md:px-8 py-4">
                 <a href="index.html" class="font-mono text-lg md:text-xl tracking-widest text-white">Personal Web</a>
-                <div class="hidden md:flex space-x-10 text-sm tracking-widest font-medium font-mono text-gray-400">
+                <div class="hidden md:flex items-center space-x-10 text-sm tracking-widest font-medium font-mono text-gray-400">
                     <a href="index.html" class="hover:text-white transition-colors">HOME</a>
                     <a href="about.html" class="text-white transition-colors">ABOUT</a>
                     <a href="index.html#work" class="hover:text-white transition-colors">PROJECTS</a>
                     <a href="index.html#contact" class="hover:text-white transition-colors">CONTACT</a>
+                    <button onclick="toggleLang()" aria-label="Switch language"
+                        class="lang-toggle-btn text-xs border border-white/20 hover:border-white/50 hover:text-white transition-colors px-3 py-1.5 rounded-full">
+                        <span class="lang-zh">EN</span><span class="lang-en">中文</span>
+                    </button>
                 </div>
-                <button onclick="toggleNav()" aria-label="Menu" class="md:hidden text-white text-2xl leading-none px-1">☰</button>
+                <div class="flex items-center gap-3 md:hidden">
+                    <button onclick="toggleLang()" aria-label="Switch language"
+                        class="lang-toggle-btn text-xs font-mono text-gray-400 hover:text-white transition-colors border border-white/20 hover:border-white/50 px-2.5 py-1 rounded-full">
+                        <span class="lang-zh">EN</span><span class="lang-en">中文</span>
+                    </button>
+                    <button onclick="toggleNav()" aria-label="Menu" class="text-white text-2xl leading-none px-1">☰</button>
+                </div>
             </div>
             <div id="mobile-nav" class="hidden flex-col md:hidden px-6 pb-4 space-y-4 text-sm tracking-widest font-medium font-mono text-gray-400">
                 <a href="index.html" class="hover:text-white transition-colors">HOME</a>
@@ -208,7 +242,7 @@
                 <div class="glass-card rounded-3xl p-8 md:p-10">
                     <ul class="space-y-8">
                         <li class="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6">
-                            <span class="text-white font-bold shrink-0 sm:w-32">程式語言</span>
+                            <span class="text-white font-bold shrink-0 sm:w-32"><span class="lang-zh">程式語言</span><span class="lang-en">Languages</span></span>
                             <div class="flex flex-wrap gap-2">
                                 <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Python</span>
                                 <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Java</span>
@@ -217,13 +251,13 @@
                             </div>
                         </li>
                         <li class="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6">
-                            <span class="text-white font-bold shrink-0 sm:w-32">專注領域</span>
-                            <p class="text-gray-300 text-lg leading-[2]">量子啟發運算、組合最佳化（<span class="font-mono">QUBO</span>,
-                                <span class="font-mono">PCA</span>）、機器學習與神經網路
+                            <span class="text-white font-bold shrink-0 sm:w-32"><span class="lang-zh">專注領域</span><span class="lang-en">Focus Areas</span></span>
+                            <p class="text-gray-300 text-lg leading-[2]"><span class="lang-zh">量子啟發運算、組合最佳化（<span class="font-mono">QUBO</span>,
+                                <span class="font-mono">PCA</span>）、機器學習與神經網路</span><span class="lang-en">Quantum-inspired computing, combinatorial optimization (<span class="font-mono">QUBO</span>, <span class="font-mono">PCA</span>), machine learning & neural networks</span>
                             </p>
                         </li>
                         <li class="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6">
-                            <span class="text-white font-bold shrink-0 sm:w-32">常用開發工具</span>
+                            <span class="text-white font-bold shrink-0 sm:w-32"><span class="lang-zh">常用開發工具</span><span class="lang-en">Tools</span></span>
                             <div class="flex flex-wrap gap-2">
                                 <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">VS
                                     Code</span>
@@ -256,9 +290,9 @@
                 </div>
 
                 <h4 class="font-display text-2xl mb-3 text-white leading-[2]">
-                    <span class="font-mono">FishVisID</span>：魚類視覺辨識與即時市場行情系統
+                    <span class="font-mono">FishVisID</span>：<span class="lang-zh">魚類視覺辨識與即時市場行情系統</span><span class="lang-en">Fish Species Recognition & Live Market Pricing System</span>
                 </h4>
-                <p class="text-gray-400 mb-6 leading-[2]">拍照即辨魚種，串接資料庫即時顯示俗名、營養價值與市場行情的 Android 影像辨識工具。</p>
+                <p class="text-gray-400 mb-6 leading-[2]"><span class="lang-zh">拍照即辨魚種，串接資料庫即時顯示俗名、營養價值與市場行情的 Android 影像辨識工具。</span><span class="lang-en">An Android image-recognition tool that identifies fish species from a photo, connecting to a database to show common names, nutritional value, and live market pricing in real time.</span></p>
                 <div class="flex gap-3 flex-wrap">
                     <span
                         class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">TensorFlow</span>
@@ -294,9 +328,9 @@
                 </div>
 
                 <h4 class="font-display text-2xl mb-3 text-white leading-[2]">
-                    突破維度詛咒：<span class="font-mono">PCA-QUBO</span> 混合式相片馬賽克求解
+                    <span class="lang-zh">突破維度詛咒：</span><span class="lang-en">Breaking the Curse of Dimensionality: </span><span class="font-mono">PCA-QUBO</span> <span class="lang-zh">混合式相片馬賽克求解</span><span class="lang-en">Hybrid Photo Mosaic Solver</span>
                 </h4>
-                <p class="text-gray-400 mb-6 leading-[2]">結合 PCA 遞迴降維與量子啟發退火，突破 35,000 選 3,200 的組合爆炸瓶頸，實現零重複的極致視覺還原。</p>
+                <p class="text-gray-400 mb-6 leading-[2]"><span class="lang-zh">結合 PCA 遞迴降維與量子啟發退火，突破 35,000 選 3,200 的組合爆炸瓶頸，實現零重複的極致視覺還原。</span><span class="lang-en">Combines recursive PCA dimensionality reduction with quantum-inspired annealing to overcome the combinatorial explosion of choosing 3,200 from 35,000 tiles, achieving zero-repeat, pixel-perfect visual reconstruction.</span></p>
                 <div class="flex gap-3 flex-wrap">
                     <span
                         class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Quantum-Inspired
@@ -317,11 +351,11 @@
         <div class="mt-16 flex flex-col md:flex-row gap-6" data-aos="fade-up" data-aos-delay="500">
             <a href="index.html#work"
                 class="bg-white hover:bg-gray-200 text-black font-bold py-4 px-10 rounded-full transition-all shadow-[0_0_15px_rgba(255,255,255,0.15)] text-center">
-                查看我的專案
+                <span class="lang-zh">查看我的專案</span><span class="lang-en">View My Projects</span>
             </a>
             <a href="index.html#contact"
                 class="border border-white/20 hover:border-white/60 py-4 px-10 rounded-full transition-all backdrop-blur-md text-center">
-                聯繫我
+                <span class="lang-zh">聯繫我</span><span class="lang-en">Contact Me</span>
             </a>
         </div>
     </section>
@@ -344,6 +378,16 @@
             const nav = document.getElementById('mobile-nav');
             nav.classList.toggle('hidden');
             nav.classList.toggle('flex');
+        }
+
+        function applyLang(lang) {
+            document.documentElement.classList.toggle('lang-en', lang === 'en');
+            localStorage.setItem('site-lang', lang);
+        }
+
+        function toggleLang() {
+            const isEn = document.documentElement.classList.contains('lang-en');
+            applyLang(isEn ? 'zh' : 'en');
         }
     </script>
 
@@ -403,30 +447,46 @@
 
                     <div class="mb-10 space-y-4">
                         <p class="text-gray-300 text-lg leading-[2]">
-                            這是一套讓魚類辨識回歸「拍照即知」的行動端系統。使用者透過手機相機拍攝或匯入照片，即可自動分類
-                            <span class="text-white font-bold">魚種</span>，並串接資料庫即時顯示俗名、營養價值與市場交易行情，解決傳統市場與超市選購海鮮時難以辨識魚種與行情的痛點。
+                            <span class="lang-zh">這是一套讓魚類辨識回歸「拍照即知」的行動端系統。使用者透過手機相機拍攝或匯入照片，即可自動分類
+                            <span class="text-white font-bold">魚種</span>，並串接資料庫即時顯示俗名、營養價值與市場交易行情，解決傳統市場與超市選購海鮮時難以辨識魚種與行情的痛點。</span><span class="lang-en">A mobile system that brings fish identification back to "just take a photo." Users capture or import a photo with their phone camera to automatically classify the <span class="text-white font-bold">fish species</span>, connecting to a database to show the common name, nutritional value, and live market pricing in real time — solving the pain point of not being able to identify seafood species or prices at traditional markets and supermarkets.</span>
                         </p>
 
                         <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
                             <p class="text-white font-bold flex items-center gap-2 mb-2">
-                                <span>🐟</span> 核心技術與架構：
+                                <span>🐟</span> <span class="lang-zh">核心技術與架構：</span><span class="lang-en">Core Technology & Architecture:</span>
                             </p>
                             <ul class="text-base text-gray-400 leading-[2] space-y-2">
-                                <li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">深度學習模型：</strong>
                                     使用 TensorFlow / Keras 搭建 CNN 架構（Rescaling、Conv2D、MaxPooling2D、Flatten、Dense），進行圖像特徵萃取與訓練。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Deep Learning Model:</strong>
+                                    Built a CNN architecture (Rescaling, Conv2D, MaxPooling2D, Flatten, Dense) with TensorFlow / Keras for image feature extraction and training.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">邊緣端部署：</strong>
                                     透過 TensorFlow Lite (TFLite) 進行模型輕量化與轉換，直接部署至 Android 行動裝置進行離線推論。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Edge Deployment:</strong>
+                                    Converted and lightened the model with TensorFlow Lite (TFLite) for direct deployment on Android devices for offline inference.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">資料工程與前處理：</strong>
                                     自建跨季節魚類影像資料集並進行影像去背處理，降低環境雜訊干擾以提升辨識穩定度；整合政府農業交易公開數據進行行情加權分析。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Data Engineering & Preprocessing:</strong>
+                                    Built a custom cross-season fish image dataset and applied background removal to reduce environmental noise and improve recognition stability; integrated open government agricultural trading data for weighted price analysis.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">前端與系統整合：</strong>
                                     採用 Android Studio 開發互動介面，結合手機相機與本機圖庫模組，實現一鍵辨識流程。
+                                </li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Frontend & System Integration:</strong>
+                                    Developed an interactive UI with Android Studio, combining the phone camera and local gallery modules into a one-tap recognition flow.
                                 </li>
                             </ul>
                         </div>
@@ -439,23 +499,23 @@
                             <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">CAPTURE</span>
-                                <p class="text-sm font-bold text-white mb-1">拍攝 / 匯入照片</p>
-                                <p class="text-[10px] text-gray-400">去背前處理，降低雜訊</p>
+                                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">拍攝 / 匯入照片</span><span class="lang-en">Capture / Import Photo</span></p>
+                                <p class="text-[10px] text-gray-400"><span class="lang-zh">去背前處理，降低雜訊</span><span class="lang-en">Background removal to reduce noise</span></p>
                             </div>
                             <div class="text-gray-500">→</div>
                             <div
                                 class="flex-1 text-center p-4 rounded-xl bg-white/10 border border-white/20 relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">TFLITE</span>
-                                <p class="text-sm font-bold text-white mb-1">離線 CNN 推論</p>
-                                <p class="text-[10px] text-gray-300">裝置端分類魚種</p>
+                                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">離線 CNN 推論</span><span class="lang-en">Offline CNN Inference</span></p>
+                                <p class="text-[10px] text-gray-300"><span class="lang-zh">裝置端分類魚種</span><span class="lang-en">On-device species classification</span></p>
                             </div>
                             <div class="text-gray-500">→</div>
                             <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">RESULT</span>
-                                <p class="text-sm font-bold text-white mb-1">比對行情資料庫</p>
-                                <p class="text-[10px] text-gray-400">顯示俗名/營養/價格</p>
+                                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">比對行情資料庫</span><span class="lang-en">Match Against Price Database</span></p>
+                                <p class="text-[10px] text-gray-400"><span class="lang-zh">顯示俗名/營養/價格</span><span class="lang-en">Shows common name / nutrition / price</span></p>
                             </div>
                         </div>
                     </div>
@@ -474,34 +534,50 @@
 
                     <div class="mb-10 space-y-4">
                         <p class="text-gray-300 text-lg leading-[2]">
-                            本碩士論文致力於解決超大型組合最佳化問題中的<span class="text-white font-bold">「維度詛咒（<span
+                            <span class="lang-zh">本碩士論文致力於解決超大型組合最佳化問題中的<span class="text-white font-bold">「維度詛咒（<span
                                     class="font-mono">Curse of Dimensionality</span>）」</span>。在生成完全不重複的相片馬賽克時，若將
                             35,000
-                            張候選圖塊精準映射至 3,200 個目標方塊，會產生上億個二元變數，直接癱瘓傳統運算硬體。本研究提出一套混合式演算法，結合主成分分析與量子啟發退火技術，成功突破運算瓶頸，實現極致的視覺還原度。
+                            張候選圖塊精準映射至 3,200 個目標方塊，會產生上億個二元變數，直接癱瘓傳統運算硬體。本研究提出一套混合式演算法，結合主成分分析與量子啟發退火技術，成功突破運算瓶頸，實現極致的視覺還原度。</span><span class="lang-en">This master's thesis tackles the <span class="text-white font-bold">"curse of dimensionality"</span> in extremely large-scale combinatorial optimization problems. When generating a completely non-repeating photo mosaic by precisely mapping 35,000 candidate tiles to 3,200 target blocks, the problem produces hundreds of millions of binary variables that cripple conventional computing hardware. This research proposes a hybrid algorithm combining Principal Component Analysis with quantum-inspired annealing to break through this computational bottleneck and achieve extreme visual fidelity.</span>
                         </p>
 
                         <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
                             <p class="text-white font-bold flex items-center gap-2 mb-2">
-                                <span>⚛️</span> 核心技術與架構：
+                                <span>⚛️</span> <span class="lang-zh">核心技術與架構：</span><span class="lang-en">Core Technology & Architecture:</span>
                             </p>
                             <ul class="text-base text-gray-400 leading-[2] space-y-2">
-                                <li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">PCA 遞迴降維空間切割：</strong>
                                     將特徵資料轉換至 CIELAB 色彩空間，提取具最大變異數的第一主成分（PC1）進行遞迴對半切割，將龐大的搜尋空間降維成硬體可負荷的小型子問題。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Recursive PCA Space Partitioning:</strong>
+                                    Converts feature data into CIELAB color space and extracts the first principal component (PC1, the axis of maximum variance) to recursively bisect the space, reducing the massive search space into small, hardware-feasible subproblems.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">QUBO 模型建構：</strong>
                                     將圖塊配對任務公式化為二次無約束二元最佳化（QUBO）模型，設計精確的懲罰項（Penalty）以嚴格確保「一方塊一圖塊」且「圖塊絕對不重複」的約束條件。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">QUBO Model Formulation:</strong>
+                                    Formulates the tile-matching task as a Quadratic Unconstrained Binary Optimization (QUBO) model, with precisely designed penalty terms to strictly enforce "one tile per block" and "zero duplicate tiles" constraints.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">硬體求解與效能評估：</strong>
                                     導入 Fujitsu Digital Annealer (DA) 與 Compal GPU Annealer (CGA)
                                     進行求解。相較於傳統模擬退火（SA）容易陷入局部極小值並產生視覺瑕疵，DA 在子問題規模為 15 時展現最佳的色彩保真度（Lowest Delta
                                     E），並將執行時間穩定控制在 1,000-3,000 秒內。
                                 </li>
-                                <li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Hardware Solving & Performance Evaluation:</strong>
+                                    Solved with the Fujitsu Digital Annealer (DA) and Compal GPU Annealer (CGA). Compared to traditional Simulated Annealing (SA), which is prone to local minima and visible artifacts, the DA achieved the best color fidelity (lowest Delta E) at a subproblem size of 15, with runtime stably held between 1,000–3,000 seconds.
+                                </li>
+                                <li class="lang-zh">
                                     <strong class="text-gray-200">學術認可：</strong>
                                     此研究成果已入選 IEEE QCE26 國際量子運算會議海報發表。
+                                </li>
+                                <li class="lang-en">
+                                    <strong class="text-gray-200">Academic Recognition:</strong>
+                                    This research has been accepted for poster presentation at the IEEE QCE26 international quantum computing conference.
                                 </li>
                             </ul>
                         </div>
@@ -514,24 +590,24 @@
                             <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">PCA</span>
-                                <p class="text-sm font-bold text-white mb-1">CIELAB 遞迴切割</p>
-                                <p class="text-[10px] text-gray-400">PC1 對半切割降維</p>
+                                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">CIELAB 遞迴切割</span><span class="lang-en">CIELAB Recursive Split</span></p>
+                                <p class="text-[10px] text-gray-400"><span class="lang-zh">PC1 對半切割降維</span><span class="lang-en">PC1-based bisection</span></p>
                             </div>
                             <div class="text-gray-500">→</div>
                             <div
                                 class="flex-1 text-center p-4 rounded-xl bg-white/10 border border-white/20 relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">QUBO</span>
-                                <p class="text-sm font-bold text-white mb-1">懲罰項建模</p>
-                                <p class="text-[10px] text-gray-300">確保零重複分配</p>
+                                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">懲罰項建模</span><span class="lang-en">Penalty Term Modeling</span></p>
+                                <p class="text-[10px] text-gray-300"><span class="lang-zh">確保零重複分配</span><span class="lang-en">Guarantees zero-duplicate assignment</span></p>
                             </div>
                             <div class="text-gray-500">→</div>
                             <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">DA
                                     / CGA</span>
-                                <p class="text-sm font-bold text-white mb-1">硬體退火求解</p>
-                                <p class="text-[10px] text-gray-400">子問題規模 15 最佳</p>
+                                <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">硬體退火求解</span><span class="lang-en">Hardware Annealing Solve</span></p>
+                                <p class="text-[10px] text-gray-400"><span class="lang-zh">子問題規模 15 最佳</span><span class="lang-en">Optimal at subproblem size 15</span></p>
                             </div>
                         </div>
                     </div>
