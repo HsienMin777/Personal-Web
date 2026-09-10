@@ -1271,8 +1271,8 @@ video {
   text-transform: uppercase;
 }
 
-.leading-\[4\] {
-  line-height: 4;
+.leading-\[2\] {
+  line-height: 2;
 }
 
 .leading-none {
