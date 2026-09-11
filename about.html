@@ -70,20 +70,18 @@
 
         /* 消光毛玻璃材質 */
         .glass-card {
-            background: rgba(40, 40, 43, 0.72);
+            background: rgba(42, 42, 46, 0.8);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.55);
             position: relative;
             overflow: hidden;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
         }
 
         .glass-card:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(46, 46, 50, 0.8);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 24px rgba(255, 255, 255, 0.06);
+            background: rgba(48, 48, 53, 0.86);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 255, 255, 0.06);
         }
 
         /* 手機版效能優化：backdrop-filter 與大面積模糊在 Safari 上非常吃資源，
@@ -190,13 +188,13 @@
                     <a href="index.html#work" class="hover:text-white transition-colors">PROJECTS</a>
                     <a href="index.html#contact" class="hover:text-white transition-colors">CONTACT</a>
                     <button onclick="toggleLang()" aria-label="Switch language"
-                        class="lang-toggle-btn text-xs border border-white/20 hover:border-white/50 hover:text-white transition-colors px-3 py-1.5 rounded-full">
+                        class="lang-toggle-btn text-xs bg-white/5 hover:bg-white/15 hover:text-white transition-colors px-3 py-1.5 rounded-full">
                         <span class="lang-zh">EN</span><span class="lang-en">中文</span>
                     </button>
                 </div>
                 <div class="flex items-center gap-3 md:hidden">
                     <button onclick="toggleLang()" aria-label="Switch language"
-                        class="lang-toggle-btn text-xs font-mono text-gray-400 hover:text-white transition-colors border border-white/20 hover:border-white/50 px-2.5 py-1 rounded-full">
+                        class="lang-toggle-btn text-xs font-mono text-gray-400 hover:text-white transition-colors bg-white/5 hover:bg-white/15 px-2.5 py-1 rounded-full">
                         <span class="lang-zh">EN</span><span class="lang-en">中文</span>
                     </button>
                     <button onclick="toggleNav()" aria-label="Menu" class="text-white text-2xl leading-none px-1">☰</button>
@@ -223,7 +221,7 @@
                 </div>
 
                 <div
-                    class="relative w-56 md:w-64 aspect-[3/4] rounded-[2rem] overflow-hidden border border-white/10 glass-card">
+                    class="relative w-56 md:w-64 aspect-[3/4] rounded-[2rem] overflow-hidden glass-card">
                     <img src="./assets/大頭照2.jpg" alt="Profile" class="w-full h-full object-cover" width="256"
                         height="341" decoding="async" fetchpriority="high">
 
@@ -244,10 +242,10 @@
                         <li class="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6">
                             <span class="text-white font-bold shrink-0 sm:w-32"><span class="lang-zh">程式語言</span><span class="lang-en">Languages</span></span>
                             <div class="flex flex-wrap gap-2">
-                                <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Python</span>
-                                <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Java</span>
-                                <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">C++</span>
-                                <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Verilog</span>
+                                <span class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">Python</span>
+                                <span class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">Java</span>
+                                <span class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">C++</span>
+                                <span class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">Verilog</span>
                             </div>
                         </li>
                         <li class="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6">
@@ -259,10 +257,10 @@
                         <li class="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6">
                             <span class="text-white font-bold shrink-0 sm:w-32"><span class="lang-zh">常用開發工具</span><span class="lang-en">Tools</span></span>
                             <div class="flex flex-wrap gap-2">
-                                <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">VS
+                                <span class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">VS
                                     Code</span>
-                                <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">LaTeX</span>
-                                <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Git</span>
+                                <span class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">LaTeX</span>
+                                <span class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">Git</span>
                             </div>
                         </li>
                     </ul>
@@ -277,10 +275,10 @@
                 onclick="openModal('fishvisid')" data-aos="zoom-in-up" data-aos-delay="200">
 
                 <div
-                    class="absolute inset-0 border-2 border-transparent group-hover:border-white/20 rounded-3xl transition-all duration-500">
+                    class="absolute inset-0 bg-white/0 group-hover:bg-white/[0.04] rounded-3xl transition-all duration-500">
                 </div>
 
-                <div class="aspect-video bg-black/40 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-white/5">
+                <div class="aspect-video bg-black/40 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
                     <div
                         class="w-full h-full bg-gradient-to-tr from-white/10 to-transparent group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
                         <span
@@ -295,18 +293,18 @@
                 <p class="text-gray-400 mb-6 leading-[2]"><span class="lang-zh">拍照即辨魚種，串接資料庫即時顯示俗名、營養價值與市場行情的 Android 影像辨識工具。</span><span class="lang-en">An Android image-recognition tool that identifies fish species from a photo, connecting to a database to show common names, nutritional value, and live market pricing in real time.</span></p>
                 <div class="flex gap-3 flex-wrap">
                     <span
-                        class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">TensorFlow</span>
+                        class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">TensorFlow</span>
                     <span
-                        class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Keras</span>
-                    <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">TensorFlow
+                        class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">Keras</span>
+                    <span class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">TensorFlow
                         Lite</span>
                     <span
-                        class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">CNN</span>
-                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Android
+                        class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">CNN</span>
+                    <span class="text-xs font-mono bg-white/5 text-gray-500 px-3 py-1 rounded">Android
                         (Java/Kotlin)</span>
-                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Computer
+                    <span class="text-xs font-mono bg-white/5 text-gray-500 px-3 py-1 rounded">Computer
                         Vision</span>
-                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Data
+                    <span class="text-xs font-mono bg-white/5 text-gray-500 px-3 py-1 rounded">Data
                         Preprocessing</span>
                 </div>
             </div>
@@ -315,10 +313,10 @@
                 onclick="openModal('thesis')" data-aos="zoom-in-up" data-aos-delay="300">
 
                 <div
-                    class="absolute inset-0 border-2 border-transparent group-hover:border-white/20 rounded-3xl transition-all duration-500">
+                    class="absolute inset-0 bg-white/0 group-hover:bg-white/[0.04] rounded-3xl transition-all duration-500">
                 </div>
 
-                <div class="aspect-video bg-black/40 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-white/5">
+                <div class="aspect-video bg-black/40 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
                     <div
                         class="w-full h-full bg-gradient-to-tr from-white/10 to-transparent group-hover:scale-105 transition-transform duration-500 flex items-center justify-center">
                         <span
@@ -333,17 +331,17 @@
                 <p class="text-gray-400 mb-6 leading-[2]"><span class="lang-zh">結合 PCA 遞迴降維與量子啟發退火，突破 35,000 選 3,200 的組合爆炸瓶頸，實現零重複的極致視覺還原。</span><span class="lang-en">Combines recursive PCA dimensionality reduction with quantum-inspired annealing to overcome the combinatorial explosion of choosing 3,200 from 35,000 tiles, achieving zero-repeat, pixel-perfect visual reconstruction.</span></p>
                 <div class="flex gap-3 flex-wrap">
                     <span
-                        class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">Quantum-Inspired
+                        class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">Quantum-Inspired
                         Computing</span>
                     <span
-                        class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">QUBO</span>
-                    <span class="text-xs font-mono border border-white/15 text-gray-300 px-3 py-1 rounded">PCA</span>
-                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Combinatorial
+                        class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">QUBO</span>
+                    <span class="text-xs font-mono bg-white/10 text-gray-300 px-3 py-1 rounded">PCA</span>
+                    <span class="text-xs font-mono bg-white/5 text-gray-500 px-3 py-1 rounded">Combinatorial
                         Optimization</span>
-                    <span class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Digital
+                    <span class="text-xs font-mono bg-white/5 text-gray-500 px-3 py-1 rounded">Digital
                         Annealer</span>
                     <span
-                        class="text-xs font-mono border border-white/10 text-gray-500 px-3 py-1 rounded">Python</span>
+                        class="text-xs font-mono bg-white/5 text-gray-500 px-3 py-1 rounded">Python</span>
                 </div>
             </div>
         </div>
@@ -354,14 +352,14 @@
                 <span class="lang-zh">查看我的專案</span><span class="lang-en">View My Projects</span>
             </a>
             <a href="index.html#contact"
-                class="border border-white/20 hover:border-white/60 py-4 px-10 rounded-full transition-all backdrop-blur-md text-center">
+                class="bg-white/10 hover:bg-white/20 py-4 px-10 rounded-full transition-all backdrop-blur-md text-center">
                 <span class="lang-zh">聯繫我</span><span class="lang-en">Contact Me</span>
             </a>
         </div>
     </section>
 
     <footer class="py-10 text-center text-gray-600 text-xs tracking-widest uppercase">
-        &copy; 2026 Developed with ❤️ by You.
+        &copy; 2026 Developed with ♥ by You.
     </footer>
 
     <script src="aos.js"></script>
@@ -434,13 +432,13 @@
     <div id="modal-overlay"
         class="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4">
         <div
-            class="glass-card max-w-3xl w-full rounded-3xl overflow-hidden relative border border-white/10 shadow-[0_0_50px_rgba(255,255,255,0.06)]">
+            class="glass-card max-w-3xl w-full rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,255,255,0.06)]">
             <div class="max-h-[80vh] overflow-y-auto overscroll-contain custom-scrollbar p-6 md:p-10">
 
                 <div class="h-1 w-full bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
 
                 <div id="modal-panel-fishvisid" class="modal-panel hidden p-6 md:p-10">
-                    <div class="relative mb-8 border-b border-white/10 pb-4 pr-12">
+                    <div class="relative mb-8 pb-4 pr-12">
                         <div class="flex items-center gap-3 min-w-0">
                             <div class="w-3 h-3 bg-white/70 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.5)]">
                             </div>
@@ -456,9 +454,9 @@
                             <span class="text-white font-bold">魚種</span>，並串接資料庫即時顯示俗名、營養價值與市場交易行情，解決傳統市場與超市選購海鮮時難以辨識魚種與行情的痛點。</span><span class="lang-en">A mobile system that brings fish identification back to "just take a photo." Users capture or import a photo with their phone camera to automatically classify the <span class="text-white font-bold">fish species</span>, connecting to a database to show the common name, nutritional value, and live market pricing in real time — solving the pain point of not being able to identify seafood species or prices at traditional markets and supermarkets.</span>
                         </p>
 
-                        <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
+                        <div class="bg-white/[0.07] p-5 rounded-xl shadow-2xl">
                             <p class="text-white font-bold flex items-center gap-2 mb-2">
-                                <span>🐟</span> <span class="lang-zh">核心技術與架構：</span><span class="lang-en">Core Technology & Architecture:</span>
+                                <span class="lang-zh">核心技術與架構：</span><span class="lang-en">Core Technology & Architecture:</span>
                             </p>
                             <ul class="text-base text-gray-400 leading-[2] space-y-2">
                                 <li class="lang-zh">
@@ -501,7 +499,7 @@
                         <p class="text-xs font-mono text-gray-500 mb-4 uppercase tracking-widest text-center">
                             Recognition Pipeline</p>
                         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                            <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                            <div class="flex-1 text-center p-4 rounded-xl bg-white/10 relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">CAPTURE</span>
                                 <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">拍攝 / 匯入照片</span><span class="lang-en">Capture / Import Photo</span></p>
@@ -509,14 +507,14 @@
                             </div>
                             <div class="text-gray-500">→</div>
                             <div
-                                class="flex-1 text-center p-4 rounded-xl bg-white/10 border border-white/20 relative">
+                                class="flex-1 text-center p-4 rounded-xl bg-white/[0.15] relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">TFLITE</span>
                                 <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">離線 CNN 推論</span><span class="lang-en">Offline CNN Inference</span></p>
                                 <p class="text-[10px] text-gray-300"><span class="lang-zh">裝置端分類魚種</span><span class="lang-en">On-device species classification</span></p>
                             </div>
                             <div class="text-gray-500">→</div>
-                            <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                            <div class="flex-1 text-center p-4 rounded-xl bg-white/10 relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">RESULT</span>
                                 <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">比對行情資料庫</span><span class="lang-en">Match Against Price Database</span></p>
@@ -527,7 +525,7 @@
                 </div>
 
                 <div id="modal-panel-thesis" class="modal-panel hidden p-6 md:p-10">
-                    <div class="relative mb-8 border-b border-white/10 pb-4 pr-12">
+                    <div class="relative mb-8 pb-4 pr-12">
                         <div class="flex items-center gap-3 min-w-0">
                             <div class="w-3 h-3 bg-white/70 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.5)]">
                             </div>
@@ -545,9 +543,9 @@
                             張候選圖塊精準映射至 3,200 個目標方塊，會產生上億個二元變數，直接癱瘓傳統運算硬體。本研究提出一套混合式演算法，結合主成分分析與量子啟發退火技術，成功突破運算瓶頸，實現極致的視覺還原度。</span><span class="lang-en">This master's thesis tackles the <span class="text-white font-bold">"curse of dimensionality"</span> in extremely large-scale combinatorial optimization problems. When generating a completely non-repeating photo mosaic by precisely mapping 35,000 candidate tiles to 3,200 target blocks, the problem produces hundreds of millions of binary variables that cripple conventional computing hardware. This research proposes a hybrid algorithm combining Principal Component Analysis with quantum-inspired annealing to break through this computational bottleneck and achieve extreme visual fidelity.</span>
                         </p>
 
-                        <div class="bg-white/5 p-5 rounded-xl border-l-4 border-white/30 shadow-2xl">
+                        <div class="bg-white/[0.07] p-5 rounded-xl shadow-2xl">
                             <p class="text-white font-bold flex items-center gap-2 mb-2">
-                                <span>⚛️</span> <span class="lang-zh">核心技術與架構：</span><span class="lang-en">Core Technology & Architecture:</span>
+                                <span class="lang-zh">核心技術與架構：</span><span class="lang-en">Core Technology & Architecture:</span>
                             </p>
                             <ul class="text-base text-gray-400 leading-[2] space-y-2">
                                 <li class="lang-zh">
@@ -592,7 +590,7 @@
                         <p class="text-xs font-mono text-gray-500 mb-4 uppercase tracking-widest text-center">
                             Solver Pipeline</p>
                         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                            <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                            <div class="flex-1 text-center p-4 rounded-xl bg-white/10 relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">PCA</span>
                                 <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">CIELAB 遞迴切割</span><span class="lang-en">CIELAB Recursive Split</span></p>
@@ -600,14 +598,14 @@
                             </div>
                             <div class="text-gray-500">→</div>
                             <div
-                                class="flex-1 text-center p-4 rounded-xl bg-white/10 border border-white/20 relative">
+                                class="flex-1 text-center p-4 rounded-xl bg-white/[0.15] relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">QUBO</span>
                                 <p class="text-sm font-bold text-white mb-1"><span class="lang-zh">懲罰項建模</span><span class="lang-en">Penalty Term Modeling</span></p>
                                 <p class="text-[10px] text-gray-300"><span class="lang-zh">確保零重複分配</span><span class="lang-en">Guarantees zero-duplicate assignment</span></p>
                             </div>
                             <div class="text-gray-500">→</div>
-                            <div class="flex-1 text-center p-4 rounded-xl bg-white/5 border border-white/10 relative">
+                            <div class="flex-1 text-center p-4 rounded-xl bg-white/10 relative">
                                 <span
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] px-2 py-0.5 rounded text-black font-bold font-mono">DA
                                     / CGA</span>
