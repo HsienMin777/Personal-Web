@@ -20,7 +20,7 @@ custom_classes = {
     'glass-card', 'blob', 'font-display', 'text-glow-white', 'glow-hover',
     'modal-panel', 'modal-active', 'modal-overlay', 'custom-scrollbar',
     'ambient-glow', 'glow-a', 'glow-b', 'matte-glass', 'group', 'hidden',
-    'text-accent-gold', 'lang-zh', 'lang-en', 'lang-toggle-btn',
+    'text-accent-gold', 'lang-zh', 'lang-en', 'lang-toggle-btn', 'lang-mode-en',
 }
 
 css_text = open('tailwind.css', encoding='utf-8').read()

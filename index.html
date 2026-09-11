@@ -43,11 +43,11 @@
             display: none;
         }
 
-        html.lang-en .lang-en {
+        html.lang-mode-en .lang-en {
             display: inline;
         }
 
-        html.lang-en .lang-zh {
+        html.lang-mode-en .lang-zh {
             display: none;
         }
 
@@ -155,7 +155,7 @@
     <script>
         // 提早套用語言偏好，避免切換到英文時畫面先閃一下中文
         if (localStorage.getItem('site-lang') === 'en') {
-            document.documentElement.classList.add('lang-en');
+            document.documentElement.classList.add('lang-mode-en');
         }
     </script>
 </head>
@@ -476,12 +476,12 @@
         }
 
         function applyLang(lang) {
-            document.documentElement.classList.toggle('lang-en', lang === 'en');
+            document.documentElement.classList.toggle('lang-mode-en', lang === 'en');
             localStorage.setItem('site-lang', lang);
         }
 
         function toggleLang() {
-            const isEn = document.documentElement.classList.contains('lang-en');
+            const isEn = document.documentElement.classList.contains('lang-mode-en');
             applyLang(isEn ? 'zh' : 'en');
         }
 
