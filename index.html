@@ -555,13 +555,13 @@
                 <li class="lang-zh">
                     <strong class="text-gray-200">跨端效能調優（Performance Tuning）：</strong>
                     利用 Flask-SocketIO 建立雙向連線，將手機螢幕轉化為電腦觸控板。開發過程中發現高頻率觸控事件會導致作業系統游標卡頓，經排查後實施雙向優化：前端導入
-                    <code class="bg-black/50 px-1 rounded text-gray-300">requestAnimationFrame</code>
+                    <code class="text-gray-300">requestAnimationFrame</code>
                     進行事件節流，後端關閉 pyautogui 的預設強制延遲 (PAUSE=0)，最終達成絲滑的操控體驗。
                 </li>
                 <li class="lang-en">
                     <strong class="text-gray-200">Cross-Device Performance Tuning:</strong>
                     Built a bidirectional connection with Flask-SocketIO to turn a phone screen into a computer trackpad. High-frequency touch events were found to cause OS cursor lag, fixed with a two-sided optimization: the frontend throttles events with
-                    <code class="bg-black/50 px-1 rounded text-gray-300">requestAnimationFrame</code>,
+                    <code class="text-gray-300">requestAnimationFrame</code>,
                     while the backend disables pyautogui's default forced delay (PAUSE=0), achieving a silky-smooth control experience.
                 </li>
                 <li class="lang-zh">
@@ -646,12 +646,12 @@
                                 <li class="lang-zh">
                                     <strong class="text-gray-200">敏感資料遮蔽中介層（Data Vault Middleware）：</strong>
                                     為了避免將使用者的真實 PII（如姓名、Email 等）明文傳送給外部 LLM API，實作了中介層機制。在發送 Prompt 前先將敏感字串抽換為
-                                    Token（如 <code class="bg-black/50 px-1 rounded text-gray-300">[SECRET_VALUE_0]</code>）；待
+                                    Token（如 <code class="text-gray-300">[SECRET_VALUE_0]</code>）；待
                                     SQL 生成後，再於本地端還原為真實資料寫入資料庫，降低資料外洩風險。
                                 </li>
                                 <li class="lang-en">
                                     <strong class="text-gray-200">Data Vault Middleware:</strong>
-                                    To avoid sending users' real PII (names, emails, etc.) in plaintext to an external LLM API, a middleware layer swaps sensitive strings for tokens (e.g. <code class="bg-black/50 px-1 rounded text-gray-300">[SECRET_VALUE_0]</code>) before the prompt is sent; after SQL is generated, the tokens are restored to real data locally before writing to the database, reducing the risk of data leakage.
+                                    To avoid sending users' real PII (names, emails, etc.) in plaintext to an external LLM API, a middleware layer swaps sensitive strings for tokens (e.g. <code class="text-gray-300">[SECRET_VALUE_0]</code>) before the prompt is sent; after SQL is generated, the tokens are restored to real data locally before writing to the database, reducing the risk of data leakage.
                                 </li>
                                 <li class="lang-zh">
                                     <strong class="text-gray-200">讀寫分離的執行邏輯（Hybrid Executor）：</strong>
@@ -763,13 +763,13 @@
                                     <strong class="text-gray-200">容器化無頭訓練環境（Dockerized Headless
                                         Training）：</strong>
                                     除了支援本機 Pygame 視覺化即時渲染外，也撰寫了 Dockerfile 與 docker-compose.yml，透過
-                                    <code class="bg-black/50 px-1 rounded text-gray-300">SDL_VIDEODRIVER=dummy</code>
+                                    <code class="text-gray-300">SDL_VIDEODRIVER=dummy</code>
                                     實作無頭模式（Headless），方便在背景或雲端伺服器進行長時間的自動化對局訓練。
                                 </li>
                                 <li class="lang-en">
                                     <strong class="text-gray-200">Dockerized Headless Training:</strong>
                                     Besides local real-time Pygame rendering, a Dockerfile and docker-compose.yml were written to implement headless mode via
-                                    <code class="bg-black/50 px-1 rounded text-gray-300">SDL_VIDEODRIVER=dummy</code>,
+                                    <code class="text-gray-300">SDL_VIDEODRIVER=dummy</code>,
                                     making long-running automated training convenient on background or cloud servers.
                                 </li>
                             </ul>
@@ -862,9 +862,9 @@
                                 (Gesture Recognition Logic)：</span><span class="lang-en">Vector-Based Gesture Classifier (Gesture Recognition Logic):</span></p>
                             <p class="text-base text-gray-400 leading-[2]">
                                 <span class="lang-zh">有別於傳統的機器學習圖像分類，實作了幾何角度演算法：計算 5 根手指關節的彎曲角度，設定 50° 為伸直與捲縮的閾值，精準判斷「張開手掌（跳躍）」、「特定三指伸直（蹲下）」與「握拳（忽略）」等動作。
-                                <br>公式：<code class="bg-black/50 px-1 rounded text-gray-300">Angle = acos( (v1⋅v2) /
+                                <br>公式：<code class="text-gray-300">Angle = acos( (v1⋅v2) /
                                     (|v1|*|v2|) )</code></span><span class="lang-en">Instead of traditional ML-based image classification, a geometric angle algorithm was implemented: it computes the bend angle of each of the 5 finger joints and uses 50° as the threshold between extended and curled, precisely distinguishing "open palm (jump)", "three specific fingers extended (duck)", and "closed fist (ignore)".
-                                <br>Formula: <code class="bg-black/50 px-1 rounded text-gray-300">Angle = acos( (v1⋅v2) /
+                                <br>Formula: <code class="text-gray-300">Angle = acos( (v1⋅v2) /
                                     (|v1|*|v2|) )</code></span>
                             </p>
                         </div>
@@ -878,23 +878,23 @@
                             <ul class="text-base text-gray-400 leading-[2] space-y-2 mt-2">
                                 <li class="lang-zh">
                                     <strong class="text-gray-200">事件模擬驅動：</strong>
-                                    透過 <code class="bg-black/50 px-1 rounded text-gray-300">keyboard</code>
+                                    透過 <code class="text-gray-300">keyboard</code>
                                     套件觸發 OS 層級的全域按鍵事件，讓手勢可以直接控制任何支援鍵盤的應用程式。
                                 </li>
                                 <li class="lang-en">
                                     <strong class="text-gray-200">Simulated Event-Driven Input:</strong>
-                                    Uses the <code class="bg-black/50 px-1 rounded text-gray-300">keyboard</code>
+                                    Uses the <code class="text-gray-300">keyboard</code>
                                     package to trigger OS-level global key events, letting gestures directly control any application that accepts keyboard input.
                                 </li>
                                 <li class="lang-zh">
                                     <strong class="text-gray-200">狀態直接注入：</strong>
                                     繞過作業系統的按鍵佇列，將辨識結果直接傳入 Pygame 角色更新邏輯
-                                    <code class="bg-black/50 px-1 rounded text-gray-300">Dinosaur.update()</code>，提升遊戲反應速度與穩定性。
+                                    <code class="text-gray-300">Dinosaur.update()</code>，提升遊戲反應速度與穩定性。
                                 </li>
                                 <li class="lang-en">
                                     <strong class="text-gray-200">Direct State Injection:</strong>
                                     Bypasses the OS keystroke queue and feeds recognition results directly into the Pygame character update logic
-                                    <code class="bg-black/50 px-1 rounded text-gray-300">Dinosaur.update()</code>, improving game responsiveness and stability.
+                                    <code class="text-gray-300">Dinosaur.update()</code>, improving game responsiveness and stability.
                                 </li>
                             </ul>
                         </div>
